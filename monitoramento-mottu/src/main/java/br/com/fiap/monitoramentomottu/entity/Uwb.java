@@ -3,18 +3,60 @@ package br.com.fiap.monitoramentomottu.entity;
 import jakarta.persistence.*;
 
 @Entity
-public class Uwb {
+@Table(name = "uwb")
 
+public class Uwb {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idTag;
+    private Long id;
 
     @Column(unique = true, nullable = false)
     private String codigo;
 
     private String status;
 
-    @OneToOne
-    @JoinColumn(name = "id_moto")
+    @OneToOne(mappedBy = "uwb")
     private Moto moto;
+
+    public Uwb() {
+    }
+
+    public Uwb(Long id, String codigo, String status, Moto moto) {
+        this.id = id;
+        this.codigo = codigo;
+        this.status = status;
+        this.moto = moto;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Moto getMoto() {
+        return moto;
+    }
+
+    public void setMoto(Moto moto) {
+        this.moto = moto;
+    }
 }

@@ -1,11 +1,12 @@
 package br.com.fiap.monitoramentomottu.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
+@Table(name = "patio")
+
 public class Patio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,5 +14,69 @@ public class Patio {
     private int qtdMoto;
     private int areaPatio;
     private int capacidadeMoto;
+    @OneToMany(mappedBy = "patio", cascade = CascadeType.ALL)
+    private List<Moto> motos;
+    @ManyToOne
+    @JoinColumn(name = "id_filial", nullable = false)
     private Filial filial;
+
+    public Patio() {
+    }
+
+    public Patio(Long id, int qtdMoto, int areaPatio, int capacidadeMoto, List<Moto> motos, Filial filial) {
+        this.id = id;
+        this.qtdMoto = qtdMoto;
+        this.areaPatio = areaPatio;
+        this.capacidadeMoto = capacidadeMoto;
+        this.motos = motos;
+        this.filial = filial;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getQtdMoto() {
+        return qtdMoto;
+    }
+
+    public void setQtdMoto(int qtdMoto) {
+        this.qtdMoto = qtdMoto;
+    }
+
+    public int getAreaPatio() {
+        return areaPatio;
+    }
+
+    public void setAreaPatio(int areaPatio) {
+        this.areaPatio = areaPatio;
+    }
+
+    public int getCapacidadeMoto() {
+        return capacidadeMoto;
+    }
+
+    public void setCapacidadeMoto(int capacidadeMoto) {
+        this.capacidadeMoto = capacidadeMoto;
+    }
+
+    public List<Moto> getMotos() {
+        return motos;
+    }
+
+    public void setMotos(List<Moto> motos) {
+        this.motos = motos;
+    }
+
+    public Filial getFilial() {
+        return filial;
+    }
+
+    public void setFilial(Filial filial) {
+        this.filial = filial;
+    }
 }
