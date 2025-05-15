@@ -9,12 +9,19 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name="numero", nullable = false)
     private int numero;
+    @Column(name="cep", nullable = false)
     private String cep;
+    @Column(name="pais", nullable = false)
     private String pais;
+    @Column(name="estado", nullable = false)
     private String estado;
+    @Column(name="cidade", nullable = false)
     private String cidade;
+    @Column(name="bairro", nullable = false)
     private String bairro;
+    @Column(name="logradouro", nullable = false)
     private String logradouro;
 
     public Endereco() {

@@ -10,14 +10,19 @@ public class Uwb {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "codigo_uwb",unique = true, nullable = false)
     private String codigo;
 
+
+    @Column(name = "status",nullable = false)
     private String status;
 
-    @OneToOne(mappedBy = "uwb")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_moto")
     private Moto moto;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_localizacao")
+    private Localizacao localizacao;
     public Uwb() {
     }
 

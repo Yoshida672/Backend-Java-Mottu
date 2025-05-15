@@ -12,10 +12,11 @@ public class Moto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name="placa",unique = true, nullable = false)
     private String placa;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "modelo",nullable = false)
     private Modelo modelo;
 
     @ManyToOne
@@ -25,20 +26,19 @@ public class Moto {
     @OneToOne(mappedBy = "moto", cascade = CascadeType.ALL)
     private Uwb uwb;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_localizacao")
-    private Localizacao localizacao;
+    @ManyToOne
+    @JoinColumn(name = "id_patio", nullable = false)
+    private Patio patio;
 
     public Moto() {
     }
 
-    public Moto(Long id, String placa, Modelo modelo, Condicao condicao, Uwb uwb, Localizacao localizacao) {
+    public Moto(Long id, String placa, Modelo modelo, Condicao condicao, Uwb uwb) {
         this.id = id;
         this.placa = placa;
         this.modelo = modelo;
         this.condicao = condicao;
         this.uwb = uwb;
-        this.localizacao = localizacao;
     }
 
     public Long getId() {
@@ -81,11 +81,5 @@ public class Moto {
         this.uwb = uwb;
     }
 
-    public Localizacao getLocalizacao() {
-        return localizacao;
-    }
 
-    public void setLocalizacao(Localizacao localizacao) {
-        this.localizacao = localizacao;
-    }
 }

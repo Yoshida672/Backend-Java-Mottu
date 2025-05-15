@@ -11,10 +11,7 @@ public record MotoResponse (
         String placa,
         String modelo,
         String condicao,
-        Localizacao localizacao,
-        List<Link> links
+        Link link
 ) {
-    public MotoResponse withLinks(List<Link> links) {
-        return new MotoResponse(id, placa, modelo, condicao, localizacao, links);
-    }
+
 }

@@ -21,22 +21,21 @@ public class Localizacao {
     private Moto moto;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime timestamp;
-
+    @Column(name="coordenada_x", nullable = false)
     private Double xCoord;
+    @Column(name="coordenada_y", nullable = false)
     private Double yCoord;
-    private Double zCoord;
 
     public Localizacao() {
     }
 
-    public Localizacao(Long id, Uwb tag, Moto moto, LocalDateTime timestamp, Double xCoord, Double yCoord, Double zCoord) {
+    public Localizacao(Long id, Uwb tag, Moto moto, LocalDateTime timestamp, Double xCoord, Double yCoord) {
         this.id = id;
         this.tag = tag;
         this.moto = moto;
         this.timestamp = timestamp;
         this.xCoord = xCoord;
         this.yCoord = yCoord;
-        this.zCoord = zCoord;
     }
 
     public Long getId() {
@@ -87,11 +86,4 @@ public class Localizacao {
         this.yCoord = yCoord;
     }
 
-    public Double getzCoord() {
-        return zCoord;
-    }
-
-    public void setzCoord(Double zCoord) {
-        this.zCoord = zCoord;
-    }
 }

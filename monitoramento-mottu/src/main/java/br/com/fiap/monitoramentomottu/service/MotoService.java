@@ -5,6 +5,8 @@ import br.com.fiap.monitoramentomottu.dto.MotoResponse;
 import br.com.fiap.monitoramentomottu.entity.*;
 import br.com.fiap.monitoramentomottu.mappers.MotoMapper;
 import br.com.fiap.monitoramentomottu.repository.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,13 +17,11 @@ public class MotoService {
 
     private final MotoRepository motoRepository;
     private final CondicaoRepository condicaoRepository;
-    private final LocalizacaoRepository localizacaoRepository;
     private final MotoMapper mapper;
 
-    public MotoService(MotoRepository motoRepository, CondicaoRepository condicaoRepository, LocalizacaoRepository localizacaoRepository, MotoMapper mapper) {
+    public MotoService(MotoRepository motoRepository, CondicaoRepository condicaoRepository, MotoMapper mapper) {
         this.motoRepository = motoRepository;
         this.condicaoRepository = condicaoRepository;
-        this.localizacaoRepository = localizacaoRepository;
         this.mapper = mapper;
     }
 
@@ -38,30 +38,30 @@ public class MotoService {
         }
         Condicao condicao = condicaoRepository.findById(dto.condicaoId())
                 .orElseThrow(() -> new Exception("Condição não encontrada"));
-        Localizacao localizacao = null;
-        if (dto.localizacaoId() != null) {
-            localizacao = localizacaoRepository.findById(dto.localizacaoId())
-                    .orElseThrow(() -> new Exception("Localização não encontrada"));
-        }
+
         Moto moto = mapper.RequestToMoto(dto);
         moto.setCondicao(condicao);
-        moto.setLocalizacao(localizacao);
         moto = motoRepository.save(moto);
-        return mapper.MotoToResponse(moto);
+        return mapper.MotoToResponse(moto,true);
     }
 
     @Transactional(readOnly = true)
     public MotoResponse getById(Long id) throws Exception {
         Moto moto = motoRepository.findById(id)
                 .orElseThrow(() -> new Exception("Moto não encontrada"));
-        return mapper.MotoToResponse(moto);
+        return mapper.MotoToResponse(moto,true);
     }
 
     @Transactional(readOnly = true)
-    public List<MotoResponse> getAll() {
-        return motoRepository.findAll().stream()
-                .map(mapper::MotoToResponse)
-                .toList();
+    public Page<MotoResponse> getAll(Pageable pageable) {
+        return motoRepository.findAll(pageable)
+                .map(moto-> {
+                    try {
+                        return mapper.MotoToResponse(moto,true);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
     }
 
     @Transactional
@@ -90,14 +90,8 @@ public class MotoService {
             moto.setCondicao(condicao);
         }
 
-        if (dto.localizacaoId() != null) {
-            Localizacao localizacao = localizacaoRepository.findById(dto.localizacaoId())
-                    .orElseThrow(() -> new Exception("Localização não encontrada"));
-            moto.setLocalizacao(localizacao);
-        }
-
         moto = motoRepository.save(moto);
-        return mapper.MotoToResponse(moto);
+        return mapper.MotoToResponse(moto,true);
     }
 
     @Transactional

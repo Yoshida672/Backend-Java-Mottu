@@ -11,8 +11,11 @@ public class Patio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "quantidade_motos",nullable = false)
     private int qtdMoto;
+    @Column(name = "area_patio",nullable = false)
     private int areaPatio;
+    @Column(name = "capacidade_motos",nullable = false)
     private int capacidadeMoto;
     @OneToMany(mappedBy = "patio", cascade = CascadeType.ALL)
     private List<Moto> motos;

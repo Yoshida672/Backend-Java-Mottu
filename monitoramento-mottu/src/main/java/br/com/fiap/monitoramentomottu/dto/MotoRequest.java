@@ -7,6 +7,5 @@ import jakarta.validation.constraints.NotNull;
 public record MotoRequest(
         @NotBlank String placa,
         @NotNull String modelo,
-        @NotNull Long condicaoId,
-        Long localizacaoId
+        @NotNull Long condicaoId
 ) {}

@@ -10,8 +10,11 @@ public class Filial {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name="nome", nullable = false)
     private String nome;
+    @Column(name="cnpj", nullable = false)
     private String cnpj;
+    @Column(name="ano", nullable = false)
     private int ano;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_endereco", nullable = false)

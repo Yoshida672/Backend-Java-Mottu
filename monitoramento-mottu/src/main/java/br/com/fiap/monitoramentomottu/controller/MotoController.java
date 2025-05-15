@@ -4,7 +4,12 @@ import br.com.fiap.monitoramentomottu.dto.MotoRequest;
 import br.com.fiap.monitoramentomottu.dto.MotoResponse;
 import br.com.fiap.monitoramentomottu.service.MotoService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.Link;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,31 +32,19 @@ public class MotoController {
     public ResponseEntity<MotoResponse> create(@RequestBody @Valid MotoRequest dto) throws Exception {
         MotoResponse response = service.create(dto);
 
-        // Adiciona links HATEOAS
-        response = adicionarLinks(response);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(response.id())
-                .toUri();
-
-        return ResponseEntity.created(location).body(response);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MotoResponse> getById(@PathVariable Long id) throws Exception {
         MotoResponse response = service.getById(id);
-        response = adicionarLinks(response);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    public ResponseEntity<List<MotoResponse>> getAll() {
-        List<MotoResponse> responses = service.getAll();
-        responses = responses.stream()
-                .map(this::adicionarLinksBasicos)
-                .toList();
-        return ResponseEntity.ok(responses);
+    public ResponseEntity<Page<MotoResponse>> getAll(@RequestParam(defaultValue = "0") Integer page) {
+        Pageable pageable = PageRequest.of(page, 2, Sort.by("categoria").ascending().and(Sort.by("nome").ascending()));
+        return new ResponseEntity<>(service.getAll(pageable), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")
@@ -59,7 +52,6 @@ public class MotoController {
             @PathVariable Long id,
             @RequestBody @Valid MotoRequest dto) throws Exception {
         MotoResponse response = service.update(id, dto);
-        response = adicionarLinks(response);
         return ResponseEntity.ok(response);
     }
 
@@ -70,18 +62,5 @@ public class MotoController {
     }
 
     // Métodos auxiliares para HATEOAS
-    private MotoResponse adicionarLinks(MotoResponse response) {
-        List<Link> links = new ArrayList<>();
-        links.add(Link.of("/motos/" + response.id(), "self"));
-        links.add(Link.of("/motos/" + response.id(), "atualizar"));
-        links.add(Link.of("/motos/" + response.id(), "deletar"));
-        links.add(Link.of("/motos", "todas-motos"));
-        return response.withLinks(links);
-    }
 
-    private MotoResponse adicionarLinksBasicos(MotoResponse response) {
-        List<Link> links = new ArrayList<>();
-        links.add(Link.of("/motos/" + response.id(), "self"));
-        return response.withLinks(links);
-    }
 }

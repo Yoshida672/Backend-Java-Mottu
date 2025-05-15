@@ -9,8 +9,9 @@ public class Condicao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @Column(name="nome", nullable = false)
     private String nome;
+    @Column(name="cor", nullable = false)
     private String cor;
 
     public Condicao() {
