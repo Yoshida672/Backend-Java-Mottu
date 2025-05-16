@@ -1,7 +1,5 @@
 package br.com.fiap.monitoramentomottu.entity;
 
-import jakarta.persistence.Table;
-@Table(name = "modelo")
 public enum Modelo {
     MOTTU_SPORT,
     MOTTU_E,

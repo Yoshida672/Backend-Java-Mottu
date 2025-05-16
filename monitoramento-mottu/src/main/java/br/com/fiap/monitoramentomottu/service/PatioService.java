@@ -1,7 +1,5 @@
 package br.com.fiap.monitoramentomottu.service;
 
-import br.com.fiap.monitoramentomottu.dto.Moto.MotoRequest;
-import br.com.fiap.monitoramentomottu.dto.Moto.MotoResponse;
 import br.com.fiap.monitoramentomottu.dto.Patio.PatioRequest;
 import br.com.fiap.monitoramentomottu.dto.Patio.PatioResponse;
 import br.com.fiap.monitoramentomottu.entity.*;
@@ -14,13 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class PatioService {
     private final MotoRepository motoRepository;
-
     private final PatioRepository patioRepository;
     private final FilialRepository filialRepository;
 
@@ -39,7 +33,7 @@ public class PatioService {
         patio.setCapacidadeMoto(dto.capacidadeMax());
         patio.setAreaPatio( dto.area());
         patio.setFilial(filialRepository.findById(dto.filialId()).orElseThrow(() -> new Exception("Filial não encontrada")));
-        patio.setMotos(motoRepository.findAllById(dto.motosId()));
+        patio.setMotos(motoRepository.findByIdIn(dto.motosId()));
         patio = patioRepository.save(patio);
         return mapper.PatioToResponse(patio,true);
     }

@@ -7,6 +7,7 @@ import br.com.fiap.monitoramentomottu.entity.Uwb;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "moto")
 public class Moto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
