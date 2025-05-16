@@ -13,25 +13,22 @@ public class Endereco {
     private int numero;
     @Column(name="cep", nullable = false)
     private String cep;
-    @Column(name="pais", nullable = false)
-    private String pais;
     @Column(name="estado", nullable = false)
     private String estado;
-    @Column(name="cidade", nullable = false)
+    @Column(name="cidade")
     private String cidade;
-    @Column(name="bairro", nullable = false)
+    @Column(name="bairro")
     private String bairro;
-    @Column(name="logradouro", nullable = false)
+    @Column(name="logradouro")
     private String logradouro;
 
     public Endereco() {
     }
 
-    public Endereco(Long id, int numero, String cep, String pais, String estado, String cidade, String bairro, String logradouro) {
+    public Endereco(Long id, int numero, String cep, String estado, String cidade, String bairro, String logradouro) {
         this.id = id;
         this.numero = numero;
         this.cep = cep;
-        this.pais = pais;
         this.estado = estado;
         this.cidade = cidade;
         this.bairro = bairro;
@@ -52,14 +49,6 @@ public class Endereco {
 
     public void setCep(String cep) {
         this.cep = cep;
-    }
-
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
     }
 
     public String getEstado() {

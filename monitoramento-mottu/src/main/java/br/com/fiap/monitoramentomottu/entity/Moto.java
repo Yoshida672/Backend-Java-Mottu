@@ -33,12 +33,13 @@ public class Moto {
     public Moto() {
     }
 
-    public Moto(Long id, String placa, Modelo modelo, Condicao condicao, Uwb uwb) {
+    public Moto(Long id, String placa, Modelo modelo, Condicao condicao, Uwb uwb, Patio patio) {
         this.id = id;
         this.placa = placa;
         this.modelo = modelo;
         this.condicao = condicao;
         this.uwb = uwb;
+        this.patio = patio;
     }
 
     public Long getId() {
@@ -81,5 +82,11 @@ public class Moto {
         this.uwb = uwb;
     }
 
+    public Patio getPatio() {
+        return patio;
+    }
 
+    public void setPatio(Patio patio) {
+        this.patio = patio;
+    }
 }

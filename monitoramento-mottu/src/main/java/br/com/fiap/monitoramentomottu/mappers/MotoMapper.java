@@ -1,13 +1,11 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
 import br.com.fiap.monitoramentomottu.controller.MotoController;
-import br.com.fiap.monitoramentomottu.dto.MotoRequest;
-import br.com.fiap.monitoramentomottu.dto.MotoResponse;
+import br.com.fiap.monitoramentomottu.dto.Moto.MotoRequest;
+import br.com.fiap.monitoramentomottu.dto.Moto.MotoResponse;
 import br.com.fiap.monitoramentomottu.entity.*;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -42,6 +40,7 @@ public class MotoMapper {
                 moto.getPlaca(),
                 moto.getModelo().name(),
                 moto.getCondicao().getNome(),
+                moto.getPatio().getFilial().getNome(),
                 link
 
         );

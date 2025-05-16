@@ -1,22 +1,16 @@
 package br.com.fiap.monitoramentomottu.controller;
 
-import br.com.fiap.monitoramentomottu.dto.MotoRequest;
-import br.com.fiap.monitoramentomottu.dto.MotoResponse;
+import br.com.fiap.monitoramentomottu.dto.Moto.MotoRequest;
+import br.com.fiap.monitoramentomottu.dto.Moto.MotoResponse;
 import br.com.fiap.monitoramentomottu.service.MotoService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/motos")
@@ -31,7 +25,6 @@ public class MotoController {
     @PostMapping
     public ResponseEntity<MotoResponse> create(@RequestBody @Valid MotoRequest dto) throws Exception {
         MotoResponse response = service.create(dto);
-
         return ResponseEntity.ok(response);
     }
 
@@ -61,6 +54,5 @@ public class MotoController {
         return ResponseEntity.noContent().build();
     }
 
-    // Métodos auxiliares para HATEOAS
 
 }

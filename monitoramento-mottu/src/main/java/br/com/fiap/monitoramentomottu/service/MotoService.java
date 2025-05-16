@@ -1,7 +1,7 @@
 package br.com.fiap.monitoramentomottu.service;
 
-import br.com.fiap.monitoramentomottu.dto.MotoRequest;
-import br.com.fiap.monitoramentomottu.dto.MotoResponse;
+import br.com.fiap.monitoramentomottu.dto.Moto.MotoRequest;
+import br.com.fiap.monitoramentomottu.dto.Moto.MotoResponse;
 import br.com.fiap.monitoramentomottu.entity.*;
 import br.com.fiap.monitoramentomottu.mappers.MotoMapper;
 import br.com.fiap.monitoramentomottu.repository.*;
@@ -10,18 +10,18 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 public class MotoService {
 
     private final MotoRepository motoRepository;
     private final CondicaoRepository condicaoRepository;
+    private final PatioRepository patioRepository;
     private final MotoMapper mapper;
 
-    public MotoService(MotoRepository motoRepository, CondicaoRepository condicaoRepository, MotoMapper mapper) {
+    public MotoService(MotoRepository motoRepository, CondicaoRepository condicaoRepository, PatioRepository patioRepository, MotoMapper mapper) {
         this.motoRepository = motoRepository;
         this.condicaoRepository = condicaoRepository;
+        this.patioRepository = patioRepository;
         this.mapper = mapper;
     }
 
@@ -38,9 +38,10 @@ public class MotoService {
         }
         Condicao condicao = condicaoRepository.findById(dto.condicaoId())
                 .orElseThrow(() -> new Exception("Condição não encontrada"));
-
+        Patio patio = patioRepository.findById(dto.patioId()).orElseThrow(()->new Exception("Patio não encontrado"));
         Moto moto = mapper.RequestToMoto(dto);
         moto.setCondicao(condicao);
+        moto.setPatio(patio);
         moto = motoRepository.save(moto);
         return mapper.MotoToResponse(moto,true);
     }

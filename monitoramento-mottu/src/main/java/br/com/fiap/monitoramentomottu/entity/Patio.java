@@ -11,7 +11,7 @@ public class Patio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "quantidade_motos",nullable = false)
+    @Column(name = "quantidade_motos")
     private int qtdMoto;
     @Column(name = "area_patio",nullable = false)
     private int areaPatio;
@@ -44,12 +44,10 @@ public class Patio {
     }
 
     public int getQtdMoto() {
+        qtdMoto = motos.size();
         return qtdMoto;
     }
 
-    public void setQtdMoto(int qtdMoto) {
-        this.qtdMoto = qtdMoto;
-    }
 
     public int getAreaPatio() {
         return areaPatio;
