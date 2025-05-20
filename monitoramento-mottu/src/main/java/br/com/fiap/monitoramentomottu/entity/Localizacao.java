@@ -12,13 +12,10 @@ public class Localizacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "id_tag")
     private Uwb tag;
 
-    @OneToOne
-    @JoinColumn(name = "id_moto")
-    private Moto moto;
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime timestamp;
     @Column(name="coordenada_x", nullable = false)
@@ -29,10 +26,9 @@ public class Localizacao {
     public Localizacao() {
     }
 
-    public Localizacao(Long id, Uwb tag, Moto moto, LocalDateTime timestamp, Double xCoord, Double yCoord) {
+    public Localizacao(Long id, Uwb tag, LocalDateTime timestamp, Double xCoord, Double yCoord) {
         this.id = id;
         this.tag = tag;
-        this.moto = moto;
         this.timestamp = timestamp;
         this.xCoord = xCoord;
         this.yCoord = yCoord;
@@ -54,13 +50,6 @@ public class Localizacao {
         this.tag = tag;
     }
 
-    public Moto getMoto() {
-        return moto;
-    }
-
-    public void setMoto(Moto moto) {
-        this.moto = moto;
-    }
 
     public LocalDateTime getTimestamp() {
         return timestamp;

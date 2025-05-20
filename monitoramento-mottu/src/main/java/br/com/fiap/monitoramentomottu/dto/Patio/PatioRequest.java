@@ -10,6 +10,6 @@ public record PatioRequest(
         @Positive int area,
         @Positive int capacidadeMax,
         @Positive Long filialId,
-        @Positive List<Long> motosId
+        List<Long> motosId
         ) {
 }

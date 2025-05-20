@@ -20,17 +20,17 @@ public class Uwb {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_moto")
     private Moto moto;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_localizacao")
+    @OneToOne(mappedBy = "tag")
     private Localizacao localizacao;
     public Uwb() {
     }
 
-    public Uwb(Long id, String codigo, String status, Moto moto) {
+    public Uwb(Long id, String codigo, String status, Moto moto, Localizacao localizacao) {
         this.id = id;
         this.codigo = codigo;
         this.status = status;
         this.moto = moto;
+        this.localizacao = localizacao;
     }
 
     public Long getId() {
@@ -63,5 +63,13 @@ public class Uwb {
 
     public void setMoto(Moto moto) {
         this.moto = moto;
+    }
+
+    public Localizacao getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(Localizacao localizacao) {
+        this.localizacao = localizacao;
     }
 }
