@@ -20,7 +20,8 @@ public class Uwb {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_moto")
     private Moto moto;
-    @OneToOne(mappedBy = "tag")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_localizacao")
     private Localizacao localizacao;
     public Uwb() {
     }

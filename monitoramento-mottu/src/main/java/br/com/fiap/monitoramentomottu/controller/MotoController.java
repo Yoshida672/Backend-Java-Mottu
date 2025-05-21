@@ -36,7 +36,7 @@ public class MotoController {
 
     @GetMapping
     public ResponseEntity<Page<MotoResponse>> getAll(@RequestParam(defaultValue = "0") Integer page) {
-        Pageable pageable = PageRequest.of(page, 2, Sort.by("categoria").ascending().and(Sort.by("nome").ascending()));
+        Pageable pageable = PageRequest.of(page, 2);
         return new ResponseEntity<>(service.getAll(pageable), HttpStatus.OK);
     }
 

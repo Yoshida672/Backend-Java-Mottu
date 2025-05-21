@@ -32,7 +32,7 @@ public class MotoMapper {
             link = linkTo(
                     methodOn(
                             MotoController.class
-                    ).getById(Long.valueOf(0))
+                    ).getById(0L)
             ).withRel("Lista de Motos");
         }
         return new MotoResponse(

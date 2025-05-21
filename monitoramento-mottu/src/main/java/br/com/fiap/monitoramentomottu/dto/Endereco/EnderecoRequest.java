@@ -12,7 +12,10 @@ public record EnderecoRequest(
     String cep,
     @NotBlank(message = "O estado não pode estar em branco")
     String estado,
+    @NotBlank(message = "A cidade não pode estar em branco")
     String cidade,
+    @NotBlank(message = "O bairro não pode estar em branco")
     String bairro,
+    @NotBlank(message = "O logradouro não pode estar em branco")
     String logradouro) {
 }

@@ -30,9 +30,9 @@ public class UwbMapper {
             moto.setId(dto.idMoto());
             uwb.setMoto(moto);
         }
-        if (dto.localizacao() != null) {
-            uwb.setLocalizacao(localizacaoMapper.RequestToLocalizacao(dto.localizacao()));
-        }
+
+        uwb.setLocalizacao(localizacaoMapper.RequestToLocalizacao(dto.localizacao()));
+
 
         return uwb;
     }
