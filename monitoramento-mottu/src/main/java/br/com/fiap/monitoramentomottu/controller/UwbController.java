@@ -1,5 +1,6 @@
 package br.com.fiap.monitoramentomottu.controller;
 
+import br.com.fiap.monitoramentomottu.dto.Localizacao.LocalizacaoRequest;
 import br.com.fiap.monitoramentomottu.dto.Uwb.UwbRequest;
 import br.com.fiap.monitoramentomottu.dto.Uwb.UwbResponse;
 
@@ -51,5 +52,11 @@ public class UwbController {
     public ResponseEntity<Void> delete(@PathVariable Long id) throws Exception {
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    @PostMapping("/posicao")
+    public ResponseEntity<String> receberDados(@RequestBody LocalizacaoRequest posicao,@PathVariable Long id) throws Exception {
+        UwbResponse response = service.updateLocalizacao(id,posicao);
+        System.out.println("Recebido: " + posicao);
+        return ResponseEntity.ok("Recebido com sucesso!");
     }
 }

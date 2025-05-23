@@ -5,6 +5,9 @@ import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoResponse;
 import br.com.fiap.monitoramentomottu.entity.Condicao;
 import br.com.fiap.monitoramentomottu.mappers.CondicaoMapper;
 import br.com.fiap.monitoramentomottu.repository.CondicaoRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,8 @@ public class CondicaoService {
     }
 
     @Transactional
+    @CachePut(value = "condicoes", key = "#result.id")
+
     public CondicaoResponse create(CondicaoRequest dto) throws Exception{
         Condicao condicao = mapper.RequestToCondicao(dto);
         condicao.setCor(dto.cor());
@@ -30,12 +35,14 @@ public class CondicaoService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(value = "condicoes", key = "#id")
     public CondicaoResponse getById(Long id) throws Exception {
         Condicao condicao = condicaoRepository.findById(id)
                 .orElseThrow(() -> new Exception("Condição não encontrada"));
         return mapper.CondicaoToResponse(condicao, true);
     }
     @Transactional(readOnly = true)
+    @Cacheable(value = "condicoes",key = "'all'")
     public Page<CondicaoResponse> getAll(Pageable pageable) {
         return condicaoRepository.findAll(pageable)
                 .map(condicao-> {
@@ -47,6 +54,7 @@ public class CondicaoService {
                 });
     }
     @Transactional
+    @CachePut(value = "condicoes", key = "#id")
     public CondicaoResponse update(Long id, CondicaoRequest dto) throws Exception {
         Condicao condicao = condicaoRepository.findById(id)
                 .orElseThrow(() -> new Exception("Condição não encontrada"));
@@ -65,6 +73,7 @@ public class CondicaoService {
     }
 
     @Transactional
+    @CacheEvict(value = "condicoes", key = "#id")
     public void delete(Long id) throws Exception {
         if (!condicaoRepository.existsById(id)) {
             throw new Exception("Condição não encontrada");
@@ -72,5 +81,15 @@ public class CondicaoService {
 
         condicaoRepository.deleteById(id);
     }
+    @CacheEvict(value = "condicoes", key = "'all'")
+    public void cleanCacheAllCondicoes() {
 
     }
+    @CacheEvict(value = "condicoes", allEntries = true)
+    public void cleanAllCacheCondicoes() {
+
+    }
+
+
+
+}

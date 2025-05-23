@@ -7,6 +7,9 @@ import br.com.fiap.monitoramentomottu.mappers.PatioMapper;
 import br.com.fiap.monitoramentomottu.repository.FilialRepository;
 import br.com.fiap.monitoramentomottu.repository.MotoRepository;
 import br.com.fiap.monitoramentomottu.repository.PatioRepository;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -28,6 +31,7 @@ public class PatioService {
     }
 
     @Transactional
+    @CachePut(value = "patios", key = "#result.id")
     public PatioResponse create(PatioRequest dto) throws Exception{
         Patio patio = mapper.RequestToPatio(dto);
         patio.setCapacidadeMoto(dto.capacidadeMax());
@@ -38,6 +42,7 @@ public class PatioService {
         return mapper.PatioToResponse(patio,true);
     }
     @Transactional(readOnly = true)
+    @Cacheable(value = "patios", key = "#id")
     public PatioResponse getById(Long id) throws Exception {
         Patio patio  = patioRepository.findById(id)
                 .orElseThrow(() -> new Exception("Patio não encontrada"));
@@ -45,6 +50,7 @@ public class PatioService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(value = "patios", key = "'all'")
     public Page<PatioResponse> getAll(Pageable pageable) {
         return patioRepository.findAll(pageable)
                 .map(patio-> {
@@ -57,6 +63,7 @@ public class PatioService {
     }
 
     @Transactional
+    @CachePut(value = "patios", key = "#id")
     public PatioResponse update(Long id, PatioRequest dto) throws Exception {
         Patio patio = patioRepository.findById(id)
                 .orElseThrow(() -> new Exception("Patio não encontrado"));
@@ -73,10 +80,18 @@ public class PatioService {
     }
 
     @Transactional
+    @CacheEvict(value = "patios",key = "#id")
     public void delete(Long id) throws Exception {
         if (!motoRepository.existsById(id)) {
             throw new Exception("Moto não encontrada");
         }
         motoRepository.deleteById(id);
+    }
+    @CacheEvict(value = "patios", key = "'all'")
+    public void cleanPatiosListCache() {
+    }
+
+    @CacheEvict(value = "patios", allEntries = true)
+    public void cleanAllPatiosCache() {
     }
 }

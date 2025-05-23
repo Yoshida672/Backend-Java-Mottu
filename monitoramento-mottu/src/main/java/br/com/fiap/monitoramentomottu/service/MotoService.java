@@ -5,6 +5,9 @@ import br.com.fiap.monitoramentomottu.dto.Moto.MotoResponse;
 import br.com.fiap.monitoramentomottu.entity.*;
 import br.com.fiap.monitoramentomottu.mappers.MotoMapper;
 import br.com.fiap.monitoramentomottu.repository.*;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +29,7 @@ public class MotoService {
     }
 
     @Transactional
+    @CachePut(value = "motos", key = "#result.id")
     public MotoResponse create(MotoRequest dto) throws Exception {
         if (motoRepository.existsByPlaca(dto.placa())) {
             throw new Exception("Placa já cadastrada!");
@@ -47,6 +51,7 @@ public class MotoService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(value = "motos", key = "#id")
     public MotoResponse getById(Long id) throws Exception {
         Moto moto = motoRepository.findById(id)
                 .orElseThrow(() -> new Exception("Moto não encontrada"));
@@ -54,6 +59,7 @@ public class MotoService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(value = "motos",key = "'all'")
     public Page<MotoResponse> getAll(Pageable pageable) {
         return motoRepository.findAll(pageable)
                 .map(moto-> {
@@ -66,6 +72,7 @@ public class MotoService {
     }
 
     @Transactional
+    @CachePut(value = "motos", key = "#id")
     public MotoResponse update(Long id, MotoRequest dto) throws Exception {
         Moto moto = motoRepository.findById(id)
                 .orElseThrow(() -> new Exception("Moto não encontrada"));
@@ -96,10 +103,21 @@ public class MotoService {
     }
 
     @Transactional
+    @CacheEvict(value = "motos", key = "#id")
+
     public void delete(Long id) throws Exception {
         if (!motoRepository.existsById(id)) {
             throw new Exception("Moto não encontrada");
         }
         motoRepository.deleteById(id);
     }
+    @CacheEvict(value = "motos", key = "'all'")
+    public void cleanMotosListCache() {
+    }
+
+    @CacheEvict(value = "motos", allEntries = true)
+    public void cleanAllMotosCache() {
+    }
+
+
 }

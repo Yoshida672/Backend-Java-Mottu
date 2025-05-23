@@ -1,9 +1,11 @@
 package br.com.fiap.monitoramentomottu.service;
 
+import br.com.fiap.monitoramentomottu.dto.Localizacao.LocalizacaoRequest;
 import br.com.fiap.monitoramentomottu.dto.Uwb.UwbRequest;
 import br.com.fiap.monitoramentomottu.dto.Uwb.UwbResponse;
 import br.com.fiap.monitoramentomottu.entity.Moto;
 import br.com.fiap.monitoramentomottu.entity.Uwb;
+import br.com.fiap.monitoramentomottu.mappers.LocalizacaoMapper;
 import br.com.fiap.monitoramentomottu.mappers.UwbMapper;
 import br.com.fiap.monitoramentomottu.repository.MotoRepository;
 import br.com.fiap.monitoramentomottu.repository.UwbRepository;
@@ -18,11 +20,13 @@ public class UwbService {
     private final UwbRepository uwbRepository;
     private final MotoRepository motoRepository;
     private final UwbMapper mapper;
+    private final LocalizacaoMapper mapperLoc;
 
-    public UwbService(UwbRepository uwbRepository, MotoRepository motoRepository, UwbMapper mapper) {
+    public UwbService(UwbRepository uwbRepository, MotoRepository motoRepository, UwbMapper mapper, LocalizacaoMapper mapperLoc) {
         this.uwbRepository = uwbRepository;
         this.motoRepository = motoRepository;
         this.mapper = mapper;
+        this.mapperLoc = mapperLoc;
     }
 
     @Transactional
@@ -70,6 +74,14 @@ public class UwbService {
             uwb.setMoto(moto);
         }
 
+        uwb = uwbRepository.save(uwb);
+        return mapper.UwbToResponse(uwb, true);
+    }
+    @Transactional
+    public UwbResponse updateLocalizacao(Long id, LocalizacaoRequest dto) throws Exception {
+        Uwb uwb = uwbRepository.findById(id)
+                .orElseThrow(() -> new Exception("UWB não encontrada"));
+        uwb.setLocalizacao(mapperLoc.RequestToLocalizacao(dto));
         uwb = uwbRepository.save(uwb);
         return mapper.UwbToResponse(uwb, true);
     }
