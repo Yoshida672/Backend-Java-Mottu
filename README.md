@@ -51,4 +51,4 @@ Este projeto é uma API RESTful para monitoramento de motos, focada em funcional
 - Busca de moto por condição
 ---
 
-> Projeto acadêmico desenvolvido para a disciplina de Projeto Integrado na FIAP — 2024.
+
