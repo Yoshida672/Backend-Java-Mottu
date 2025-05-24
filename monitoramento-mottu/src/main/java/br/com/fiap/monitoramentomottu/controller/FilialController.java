@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class FilialController {
 
     @GetMapping
     public ResponseEntity<Page<FilialResponse>> getAll(@RequestParam(defaultValue = "0") Integer page) {
-        Pageable pageable = PageRequest.of(page,5);
+        Pageable pageable = PageRequest.of(page,5, Sort.by("nome").ascending().and(Sort.by("cnpj").ascending()));
         return new ResponseEntity<>(service.getAll(pageable), HttpStatus.OK);
     }
 

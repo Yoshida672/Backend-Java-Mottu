@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class MotoService {
 
@@ -118,6 +120,37 @@ public class MotoService {
     @CacheEvict(value = "motos", allEntries = true)
     public void cleanAllMotosCache() {
     }
+    public List<MotoResponse> buscarMotos(
+            String modelo,
+            String condicao) {
 
+        List<Moto> resultado;
+
+        if (modelo != null) {
+            try{
+                Modelo modelo1 = Modelo.valueOf(modelo);
+                resultado = motoRepository.findByModelo(modelo1);
+            }
+            catch (Exception e){
+                System.out.println("Nao foi possivel, "+e);
+                resultado = motoRepository.findAll();
+            }
+        }
+        else if (condicao != null) {
+            resultado = motoRepository.findByCondicaoNomeIgnoreCase(condicao);
+        } else {
+            System.out.println("Erro");
+            resultado = motoRepository.findAll();
+        }
+
+        List<MotoResponse> resposta = resultado.stream().map((Moto moto) -> {
+            try {
+                return mapper.MotoToResponse(moto,true);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).toList();
+        return resposta;
+    }
 
 }
