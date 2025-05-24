@@ -25,7 +25,6 @@ Este projeto é uma API RESTful para monitoramento de motos, focada em funcional
 
 ---
 
-
 ## 📌 Ordem de Teste dos CRUDs 
 
 ### 1. ⚙️ **Condição**
@@ -39,7 +38,7 @@ Este projeto é uma API RESTful para monitoramento de motos, focada em funcional
 ---
 
 ## ✅ Funcionalidades
-
+- Segurança na conexão **Oracle** usando variáveis de ambiente
 - Cadastro e listagem de **Filiais**
 - Cadastro e listagem de **Motos**
 - Cadastro e vinculação de **UWB** à moto
