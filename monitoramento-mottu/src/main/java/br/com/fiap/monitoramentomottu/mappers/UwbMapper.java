@@ -10,6 +10,8 @@ import br.com.fiap.monitoramentomottu.entity.Localizacao;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -31,9 +33,6 @@ public class UwbMapper {
             uwb.setMoto(moto);
         }
 
-        uwb.setLocalizacao(localizacaoMapper.RequestToLocalizacao(dto.localizacao()));
-
-
         return uwb;
     }
 
@@ -47,9 +46,9 @@ public class UwbMapper {
         LocalizacaoResponse localizacao = null;
         if (uwb.getLocalizacao() != null) {
             Localizacao loc = uwb.getLocalizacao();
-            localizacao = new LocalizacaoResponse(
+            localizacao =  LocalizacaoResponse.from(
                     loc.getId(),
-                    loc.getTimestamp(),
+                    LocalDateTime.now().withNano(0),
                     loc.getxCoord(),
                     loc.getyCoord()
             );

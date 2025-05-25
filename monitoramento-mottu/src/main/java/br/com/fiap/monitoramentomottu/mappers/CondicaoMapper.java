@@ -33,13 +33,13 @@ public class CondicaoMapper {
             link = linkTo(
                     methodOn(
                             CondicaoController.class
-                    ).getById(Long.valueOf(0))
+                    ).getById(0L)
             ).withRel("Lista de Condições");
         }
         return new CondicaoResponse(
                 condicao.getId(),
-                condicao.getCor(),
                 condicao.getNome(),
+                condicao.getCor(),
                 link
 
         );

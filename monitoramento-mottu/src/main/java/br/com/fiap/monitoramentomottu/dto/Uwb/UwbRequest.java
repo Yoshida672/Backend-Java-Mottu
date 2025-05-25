@@ -12,7 +12,6 @@ public record UwbRequest(
         @NotBlank(message = "O status não pode estar em branco")
         String status,
 
-        Long idMoto,
-        LocalizacaoRequest localizacao
+        Long idMoto
 
 ) {}

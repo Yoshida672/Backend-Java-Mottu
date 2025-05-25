@@ -53,10 +53,10 @@ public class UwbController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-    @PostMapping("/posicao")
-    public ResponseEntity<String> receberDados(@RequestBody LocalizacaoRequest posicao,@PathVariable Long id) throws Exception {
+    @PostMapping("/posicao/{id}")
+    public ResponseEntity<UwbResponse> receberDados(@RequestBody LocalizacaoRequest posicao,@PathVariable Long id) throws Exception {
         UwbResponse response = service.updateLocalizacao(id,posicao);
         System.out.println("Recebido: " + posicao);
-        return ResponseEntity.ok("Recebido com sucesso!");
+        return ResponseEntity.ok(response);
     }
 }
