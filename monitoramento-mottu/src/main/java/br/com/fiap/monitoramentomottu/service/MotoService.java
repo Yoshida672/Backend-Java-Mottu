@@ -100,6 +100,12 @@ public class MotoService {
             moto.setCondicao(condicao);
         }
 
+        if(dto.patioId()!=null){
+            Patio patio  = patioRepository.findById(dto.patioId())
+                    .orElseThrow(()->new Exception("Patio nao encontrado"));
+            moto.setPatio(patio);
+        }
+
         moto = motoRepository.save(moto);
         return mapper.MotoToResponse(moto,true);
     }
