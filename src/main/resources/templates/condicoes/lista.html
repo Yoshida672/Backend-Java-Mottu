@@ -29,6 +29,10 @@
         <td th:text="${condicao.id}"></td>
         <td th:text="${condicao.nome}"></td>
         <td th:text="${condicao.cor}"></td>
+        <td class="p-3">
+            <a class="text-blue-600 hover:underline" th:href="@{/condicoes/editar/{id}(id=${condicao.id})}">Editar</a>
+            <a class="text-blue-600 hover:underline" th:href="@{/condicoes/deletar/{id}(id=${condicao.id})}">Deletar</a>
+        </td>
     </tr>
     </tbody>
 </table>

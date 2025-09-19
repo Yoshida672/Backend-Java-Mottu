@@ -31,20 +31,37 @@ public class CondicaoViewController {
     }
     @GetMapping("/nova")
     public String novaCondicao(Model model) {
-        model.addAttribute("condicoes", new CondicaoRequest(null, null));
+        model.addAttribute("condicao", new CondicaoRequest(null, null));
         return "condicoes/formulario";
     }
     @PostMapping("/salvar")
     public String salvarCondicoes(@Valid
-                                  @ModelAttribute("condicoes") CondicaoRequest condicaoRequest,
+                                  @ModelAttribute("condicao") CondicaoRequest condicaoRequest,
+                                  @RequestParam(required = false) Long id,
                                   BindingResult bindingResult,
                                   Model model) throws Exception {
         if (bindingResult.hasErrors()) {
             model.addAttribute("condicao", condicaoRequest);
             return "condicoes/formulario";
         }
-        service.create(condicaoRequest);
+        if(id!=null){
+            service.update(id,condicaoRequest);
+            System.out.println("Update");
+        }
+        else {
+            service.create(condicaoRequest);
+            System.out.println("Create");
+        }
         return "redirect:/condicoes/listar";
     }
-
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable Long id, Model model) throws Exception {
+        model.addAttribute("condicao",service.getById(id));
+        return "condicoes/formulario";
+    }
+    @GetMapping("deletar/{id}")
+    public String deletar(@PathVariable Long id) throws Exception {
+        service.delete(id);
+        return "redirect:/condicoes/listar";
+    }
 }
