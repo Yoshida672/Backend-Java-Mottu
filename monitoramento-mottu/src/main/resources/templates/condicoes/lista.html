@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Condições</title>
+    <style>
+        table { border-collapse: collapse; width: 50%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f0f0f0; }
+        .pagination { margin-top: 20px; }
+        .pagination a { margin: 0 5px; text-decoration: none; }
+        .pagination span { margin: 0 5px; }
+    </style>
+</head>
+<body>
+
+<h1>Lista de Condições</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Cor</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="condicao : ${condicoes.content}">
+        <td th:text="${condicao.id}"></td>
+        <td th:text="${condicao.nome}"></td>
+        <td th:text="${condicao.cor}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="pagination">
+    <a th:if="${condicoes.hasPrevious()}"
+       th:href="@{/condicoes/listar(page=${condicoes.number - 1})}">Anterior</a>
+
+    <span>Página <span th:text="${condicoes.number + 1}"></span> de <span th:text="${condicoes.totalPages}"></span></span>
+
+    <a th:if="${condicoes.hasNext()}"
+       th:href="@{/condicoes/listar(page=${condicoes.number + 1})}">Próximo</a>
+</div>
+
+<div style="margin-top: 20px;">
+    <a th:href="@{/condicoes/nova}">Nova Condição</a>
+</div>
+
+</body>
+</html>

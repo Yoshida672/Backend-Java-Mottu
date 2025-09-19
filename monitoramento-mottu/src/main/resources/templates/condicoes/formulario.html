@@ -1,0 +1,30 @@
+<!-- src/main/resources/templates/condicoes/formulario.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Condição</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Cadastrar Condição</h1>
+
+<form th:action="@{/condicoes/salvar}" th:object="${condicoes}" method="post">
+
+    <div>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" th:field="*{nome}" placeholder="Digite o nome da condição">
+        <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" style="color:red"></div>
+    </div>
+
+    <div>
+        <label for="cor">Cor:</label>
+        <input type="text" id="cor" th:field="*{cor}" placeholder="Digite a cor da condição">
+        <div th:if="${#fields.hasErrors('cor')}" th:errors="*{cor}" style="color:red"></div>
+    </div>
+
+    <button type="submit">Salvar</button>
+    <a th:href="@{/condicoes/listar}">Cancelar</a>
+</form>
+</body>
+</html>
