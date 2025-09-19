@@ -41,18 +41,21 @@ public class CondicaoService {
                 .orElseThrow(() -> new Exception("Condição não encontrada"));
         return mapper.CondicaoToResponse(condicao, true);
     }
+
     @Transactional(readOnly = true)
-    @Cacheable(value = "condicoes",key = "'all'")
+    @Cacheable(value = "condicoes", key = "#pageable.pageNumber + '-' + #pageable.pageSize")
     public Page<CondicaoResponse> getAll(Pageable pageable) {
         return condicaoRepository.findAll(pageable)
-                .map(condicao-> {
+                .map(condicao -> {
                     try {
-                        return mapper.CondicaoToResponse(condicao,true);
+                        return mapper.CondicaoToResponse(condicao, true);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                 });
     }
+
+
     @Transactional
     @CachePut(value = "condicoes", key = "#id")
     public CondicaoResponse update(Long id, CondicaoRequest dto) throws Exception {

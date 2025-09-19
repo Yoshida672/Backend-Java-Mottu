@@ -11,14 +11,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/condicoes")
-public class CondicaoController {
+@RequestMapping("api/condicoes")
+public class CondicaoRestController {
     private final CondicaoService service;
 
-    public CondicaoController(CondicaoService service) {
+    public CondicaoRestController(CondicaoService service) {
         this.service = service;
     }
 
@@ -36,7 +37,7 @@ public class CondicaoController {
 
     @GetMapping
     public ResponseEntity<Page<CondicaoResponse>> getAll(@RequestParam(defaultValue = "0") Integer page) {
-        Pageable pageable = PageRequest.of(page,10,   Sort.by("cor").ascending());
+        Pageable pageable = PageRequest.of(page,1,   Sort.by("cor").ascending());
         return new ResponseEntity<>(service.getAll(pageable), HttpStatus.OK);
     }
 
@@ -53,4 +54,6 @@ public class CondicaoController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+
 }

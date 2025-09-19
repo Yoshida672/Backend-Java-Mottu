@@ -1,6 +1,6 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.controller.CondicaoController;
+import br.com.fiap.monitoramentomottu.controller.CondicaoRestController;
 
 import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoRequest;
 import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoResponse;
@@ -26,13 +26,13 @@ public class CondicaoMapper {
         if (self) {
             link = linkTo(
                     methodOn(
-                            CondicaoController.class
+                            CondicaoRestController.class
                     ).getById(condicao.getId())
             ).withSelfRel();
         } else {
             link = linkTo(
                     methodOn(
-                            CondicaoController.class
+                            CondicaoRestController.class
                     ).getById(0L)
             ).withRel("Lista de Condições");
         }

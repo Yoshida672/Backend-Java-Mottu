@@ -30,7 +30,7 @@ public class Moto {
     @ManyToOne
     @JoinColumn(name = "id_patio", nullable = false)
     private Patio patio;
-
+    
     public Moto() {
     }
 

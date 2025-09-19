@@ -1,12 +1,8 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.controller.CondicaoController;
 import br.com.fiap.monitoramentomottu.controller.PatioController;
-import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoRequest;
-import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoResponse;
 import br.com.fiap.monitoramentomottu.dto.Patio.PatioRequest;
 import br.com.fiap.monitoramentomottu.dto.Patio.PatioResponse;
-import br.com.fiap.monitoramentomottu.entity.Condicao;
 import br.com.fiap.monitoramentomottu.entity.Patio;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;
