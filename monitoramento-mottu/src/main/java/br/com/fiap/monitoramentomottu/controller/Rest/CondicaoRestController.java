@@ -1,4 +1,4 @@
-package br.com.fiap.monitoramentomottu.controller;
+package br.com.fiap.monitoramentomottu.controller.Rest;
 
 import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoRequest;
 import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoResponse;
@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

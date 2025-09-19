@@ -1,6 +1,6 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.controller.PatioController;
+import br.com.fiap.monitoramentomottu.controller.Rest.PatioRestController;
 import br.com.fiap.monitoramentomottu.dto.Patio.PatioRequest;
 import br.com.fiap.monitoramentomottu.dto.Patio.PatioResponse;
 import br.com.fiap.monitoramentomottu.entity.Patio;
@@ -23,13 +23,13 @@ public class PatioMapper {
         if (self) {
             link = linkTo(
                     methodOn(
-                            PatioController.class
+                            PatioRestController.class
                     ).getById(patio.getId())
             ).withSelfRel();
         } else {
             link = linkTo(
                     methodOn(
-                            PatioController.class
+                            PatioRestController.class
                     ).getById(Long.valueOf(0))
             ).withRel("Lista de Patios");
         }

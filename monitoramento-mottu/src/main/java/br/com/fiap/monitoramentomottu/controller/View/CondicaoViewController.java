@@ -1,4 +1,4 @@
-package br.com.fiap.monitoramentomottu.controller;
+package br.com.fiap.monitoramentomottu.controller.View;
 
 import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoRequest;
 import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoResponse;
@@ -24,7 +24,7 @@ public class CondicaoViewController {
 
     @GetMapping("/listar")
     public String listar(@RequestParam(defaultValue = "0") Integer page, Model model) {
-        Pageable pageable = PageRequest.of(page, 1, Sort.by("id").ascending());
+        Pageable pageable = PageRequest.of(page, 2, Sort.by("id").ascending());
         Page<CondicaoResponse> condicoes = service.getAll(pageable);
         model.addAttribute("condicoes", condicoes);
         return "condicoes/lista";

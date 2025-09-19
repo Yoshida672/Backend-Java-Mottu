@@ -1,6 +1,6 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.controller.FilialController;
+import br.com.fiap.monitoramentomottu.controller.Rest.FiliaRestController;
 import br.com.fiap.monitoramentomottu.dto.Filial.FilialRequest;
 import br.com.fiap.monitoramentomottu.dto.Filial.FilialResponse;
 import br.com.fiap.monitoramentomottu.dto.Patio.PatioResponse;
@@ -38,8 +38,8 @@ public class FilialMapper {
         Link link = null;
         try {
             link = self
-                    ? linkTo(methodOn(FilialController.class).getById(filial.getId())).withSelfRel()
-                    : linkTo(methodOn(FilialController.class).getById(0L)).withRel("Lista de Filiais");
+                    ? linkTo(methodOn(FiliaRestController.class).getById(filial.getId())).withSelfRel()
+                    : linkTo(methodOn(FiliaRestController.class).getById(0L)).withRel("Lista de Filiais");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

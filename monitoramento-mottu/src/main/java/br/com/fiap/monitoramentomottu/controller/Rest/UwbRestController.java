@@ -1,4 +1,4 @@
-package br.com.fiap.monitoramentomottu.controller;
+package br.com.fiap.monitoramentomottu.controller.Rest;
 
 import br.com.fiap.monitoramentomottu.dto.Localizacao.LocalizacaoRequest;
 import br.com.fiap.monitoramentomottu.dto.Uwb.UwbRequest;
@@ -14,11 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/tags")
-public class UwbController {
+public class UwbRestController {
     private final UwbService service;
 
 
-    public UwbController(UwbService service) {
+    public UwbRestController(UwbService service) {
         this.service = service;
     }
 

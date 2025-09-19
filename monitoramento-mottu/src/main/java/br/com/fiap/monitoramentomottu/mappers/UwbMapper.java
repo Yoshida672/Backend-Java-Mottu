@@ -1,6 +1,6 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.controller.UwbController;
+import br.com.fiap.monitoramentomottu.controller.Rest.UwbRestController;
 import br.com.fiap.monitoramentomottu.dto.Uwb.UwbRequest;
 import br.com.fiap.monitoramentomottu.dto.Uwb.UwbResponse;
 import br.com.fiap.monitoramentomottu.dto.Localizacao.LocalizacaoResponse;
@@ -38,8 +38,8 @@ public class UwbMapper {
 
     public UwbResponse UwbToResponse(Uwb uwb, boolean self) throws Exception {
         Link link = self
-                ? linkTo(methodOn(UwbController.class).getById(uwb.getId())).withSelfRel()
-                : linkTo(methodOn(UwbController.class).getById(0L)).withRel("Lista de UWBs");
+                ? linkTo(methodOn(UwbRestController.class).getById(uwb.getId())).withSelfRel()
+                : linkTo(methodOn(UwbRestController.class).getById(0L)).withRel("Lista de UWBs");
 
         String motoPlaca = (uwb.getMoto() != null) ? uwb.getMoto().getPlaca() : null;
 

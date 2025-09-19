@@ -1,10 +1,7 @@
-package br.com.fiap.monitoramentomottu.controller;
+package br.com.fiap.monitoramentomottu.controller.Rest;
 
-import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoRequest;
-import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoResponse;
 import br.com.fiap.monitoramentomottu.dto.Patio.PatioRequest;
 import br.com.fiap.monitoramentomottu.dto.Patio.PatioResponse;
-import br.com.fiap.monitoramentomottu.service.MotoService;
 import br.com.fiap.monitoramentomottu.service.PatioService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -17,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/patios")
-public class PatioController {
+public class PatioRestController {
     private final PatioService service;
 
-    public PatioController(PatioService service) {
+    public PatioRestController(PatioService service) {
         this.service = service;
     }
 

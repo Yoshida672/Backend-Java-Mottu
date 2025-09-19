@@ -1,8 +1,7 @@
-package br.com.fiap.monitoramentomottu.controller;
+package br.com.fiap.monitoramentomottu.controller.Rest;
 
 import br.com.fiap.monitoramentomottu.dto.Moto.MotoRequest;
 import br.com.fiap.monitoramentomottu.dto.Moto.MotoResponse;
-import br.com.fiap.monitoramentomottu.entity.Modelo;
 import br.com.fiap.monitoramentomottu.service.MotoService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -17,11 +16,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/motos")
-public class MotoController {
+public class MotoRestController {
 
     private final MotoService service;
 
-    public MotoController(MotoService service) {
+    public MotoRestController(MotoService service) {
         this.service = service;
     }
 

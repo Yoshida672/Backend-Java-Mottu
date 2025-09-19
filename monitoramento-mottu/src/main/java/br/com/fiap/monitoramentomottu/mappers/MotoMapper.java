@@ -1,6 +1,6 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.controller.MotoController;
+import br.com.fiap.monitoramentomottu.controller.Rest.MotoRestController;
 import br.com.fiap.monitoramentomottu.dto.Moto.MotoRequest;
 import br.com.fiap.monitoramentomottu.dto.Moto.MotoResponse;
 import br.com.fiap.monitoramentomottu.entity.*;
@@ -25,13 +25,13 @@ public class MotoMapper {
         if (self) {
             link = linkTo(
                     methodOn(
-                            MotoController.class
+                            MotoRestController.class
                     ).getById(moto.getId())
             ).withSelfRel();
         } else {
             link = linkTo(
                     methodOn(
-                            MotoController.class
+                            MotoRestController.class
                     ).getById(0L)
             ).withRel("Lista de Motos");
         }
