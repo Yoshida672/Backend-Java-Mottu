@@ -10,7 +10,9 @@
 <h1>Cadastrar Condição</h1>
 
 <form th:action="@{/condicoes/salvar}" th:object="${condicao}" method="post">
-    <input type="hidden" th:field="*{id}" />
+    <div>
+        <input type="hidden" th:field="*{id}">
+    </div>
     <div>
 
         <label for="nome">Nome:</label>

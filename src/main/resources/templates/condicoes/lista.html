@@ -39,17 +39,25 @@
 
 <div class="pagination">
     <a th:if="${condicoes.hasPrevious()}"
-       th:href="@{/condicoes/listar(page=${condicoes.number - 1})}">Anterior</a>
+       th:href="@{/condicoes/listar(page=${condicoes.number - 1})}">
+        Anterior
+    </a>
 
-    <span>Página <span th:text="${condicoes.number + 1}"></span> de <span th:text="${condicoes.totalPages}"></span></span>
+    <span>
+    Página <span th:text="${condicoes.totalPages == 0 ? 1 : condicoes.number + 1}"></span>
+    de <span th:text="${condicoes.totalPages == 0 ? 1 : condicoes.totalPages}"></span>
+    </span>
 
     <a th:if="${condicoes.hasNext()}"
-       th:href="@{/condicoes/listar(page=${condicoes.number + 1})}">Próximo</a>
+       th:href="@{/condicoes/listar(page=${condicoes.number + 1})}">
+        Próximo
+    </a>
 </div>
 
 <div style="margin-top: 20px;">
     <a th:href="@{/condicoes/nova}">Nova Condição</a>
 </div>
+
 
 </body>
 </html>
