@@ -1,5 +1,6 @@
 package br.com.fiap.monitoramentomottu.controller.Rest;
 
+import br.com.fiap.monitoramentomottu.controller.Interface.IRestController;
 import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoRequest;
 import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoResponse;
 
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/condicoes")
-public class CondicaoRestController {
+public class CondicaoRestController implements IRestController<CondicaoRequest,CondicaoResponse,Long> {
     private final CondicaoService service;
 
     public CondicaoRestController(CondicaoService service) {

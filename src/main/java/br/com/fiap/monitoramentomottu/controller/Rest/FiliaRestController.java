@@ -1,6 +1,7 @@
 package br.com.fiap.monitoramentomottu.controller.Rest;
 
 
+import br.com.fiap.monitoramentomottu.controller.Interface.IRestController;
 import br.com.fiap.monitoramentomottu.dto.Filial.FilialRequest;
 import br.com.fiap.monitoramentomottu.dto.Filial.FilialResponse;
 import br.com.fiap.monitoramentomottu.service.FilialService;
@@ -14,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/filiais")
-public class FiliaRestController {
+public class FiliaRestController implements IRestController<FilialRequest,FilialResponse,Long> {
     private final FilialService service;
 
     public FiliaRestController(FilialService service) {

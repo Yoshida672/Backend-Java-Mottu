@@ -1,5 +1,6 @@
 package br.com.fiap.monitoramentomottu.controller.Rest;
 
+import br.com.fiap.monitoramentomottu.controller.Interface.IRestController;
 import br.com.fiap.monitoramentomottu.dto.Patio.PatioRequest;
 import br.com.fiap.monitoramentomottu.dto.Patio.PatioResponse;
 import br.com.fiap.monitoramentomottu.service.PatioService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/patios")
-public class PatioRestController {
+public class PatioRestController implements IRestController<PatioRequest,PatioResponse,Long> {
     private final PatioService service;
 
     public PatioRestController(PatioService service) {

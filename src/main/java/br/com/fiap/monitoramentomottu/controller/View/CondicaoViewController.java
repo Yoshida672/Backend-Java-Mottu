@@ -1,5 +1,6 @@
 package br.com.fiap.monitoramentomottu.controller.View;
 
+import br.com.fiap.monitoramentomottu.controller.Interface.IViewController;
 import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoRequest;
 import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoResponse;
 import br.com.fiap.monitoramentomottu.service.CondicaoService;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/condicoes")
-public class CondicaoViewController {
+public class CondicaoViewController implements IViewController<CondicaoRequest,Long> {
     private final CondicaoService service;
 
     public CondicaoViewController(CondicaoService service) {
@@ -30,12 +31,12 @@ public class CondicaoViewController {
         return "condicoes/lista";
     }
     @GetMapping("/nova")
-    public String novaCondicao(Model model) {
-        model.addAttribute("condicao", new CondicaoRequest(null, null));
+    public String nova(Model model) {
+        model.addAttribute("condicao", new CondicaoRequest(null,null, null));
         return "condicoes/formulario";
     }
     @PostMapping("/salvar")
-    public String salvarCondicoes(@Valid
+    public String salvar(@Valid
                                   @ModelAttribute("condicao") CondicaoRequest condicaoRequest,
                                   @RequestParam(required = false) Long id,
                                   BindingResult bindingResult,

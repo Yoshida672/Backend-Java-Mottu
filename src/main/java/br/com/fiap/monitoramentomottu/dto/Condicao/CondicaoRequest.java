@@ -3,6 +3,7 @@ package br.com.fiap.monitoramentomottu.dto.Condicao;
 import jakarta.validation.constraints.NotBlank;
 
 public record CondicaoRequest(
+        Long id,
         @NotBlank(message = "O nome da condição é obrigatório")
         String nome,
 

@@ -1,5 +1,6 @@
 package br.com.fiap.monitoramentomottu.controller.Rest;
 
+import br.com.fiap.monitoramentomottu.controller.Interface.IRestController;
 import br.com.fiap.monitoramentomottu.dto.Localizacao.LocalizacaoRequest;
 import br.com.fiap.monitoramentomottu.dto.Uwb.UwbRequest;
 import br.com.fiap.monitoramentomottu.dto.Uwb.UwbResponse;
@@ -14,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/tags")
-public class UwbRestController {
+public class UwbRestController implements IRestController<UwbRequest,UwbResponse,Long> {
     private final UwbService service;
 
 

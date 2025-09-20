@@ -23,7 +23,6 @@ public class CondicaoService {
     }
 
     @Transactional
-    @CachePut(value = "condicoes", key = "#result.id")
     public CondicaoResponse create(CondicaoRequest dto) throws Exception{
         Condicao condicao = mapper.RequestToCondicao(dto);
         condicao.setCor(dto.cor());
@@ -35,7 +34,6 @@ public class CondicaoService {
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(value = "condicoes", key = "#id")
     public CondicaoResponse getById(Long id) throws Exception {
         Condicao condicao = condicaoRepository.findById(id)
                 .orElseThrow(() -> new Exception("Condição não encontrada"));
@@ -43,7 +41,6 @@ public class CondicaoService {
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(value = "condicoes", key = "#pageable.pageNumber + '-' + #pageable.pageSize")
     public Page<CondicaoResponse> getAll(Pageable pageable) {
         return condicaoRepository.findAll(pageable)
                 .map(condicao -> {
@@ -57,7 +54,6 @@ public class CondicaoService {
 
 
     @Transactional
-    @CachePut(value = "condicoes", key = "#id")
     public CondicaoResponse update(Long id, CondicaoRequest dto) throws Exception {
         Condicao condicao = condicaoRepository.findById(id)
                 .orElseThrow(() -> new Exception("Condição não encontrada"));
@@ -76,7 +72,6 @@ public class CondicaoService {
     }
 
     @Transactional
-    @CacheEvict(value = "condicoes", key = "#id")
     public void delete(Long id) throws Exception {
         if (!condicaoRepository.existsById(id)) {
             throw new Exception("Condição não encontrada");
@@ -84,14 +79,7 @@ public class CondicaoService {
 
         condicaoRepository.deleteById(id);
     }
-    @CacheEvict(value = "condicoes", key = "'all'")
-    public void cleanCacheAllCondicoes() {
 
-    }
-    @CacheEvict(value = "condicoes", allEntries = true)
-    public void cleanAllCacheCondicoes() {
-
-    }
 
 
 

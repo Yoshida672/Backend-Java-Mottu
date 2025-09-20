@@ -1,5 +1,6 @@
 package br.com.fiap.monitoramentomottu.controller.Rest;
 
+import br.com.fiap.monitoramentomottu.controller.Interface.IRestController;
 import br.com.fiap.monitoramentomottu.dto.Moto.MotoRequest;
 import br.com.fiap.monitoramentomottu.dto.Moto.MotoResponse;
 import br.com.fiap.monitoramentomottu.service.MotoService;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/motos")
-public class MotoRestController {
+public class MotoRestController implements IRestController<MotoRequest,MotoResponse,Long> {
 
     private final MotoService service;
 
