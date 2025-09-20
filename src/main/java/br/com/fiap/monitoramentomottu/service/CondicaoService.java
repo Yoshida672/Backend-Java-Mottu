@@ -1,20 +1,18 @@
 package br.com.fiap.monitoramentomottu.service;
 
-import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoRequest;
-import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoResponse;
+import br.com.fiap.monitoramentomottu.dto.request.CondicaoRequest;
+import br.com.fiap.monitoramentomottu.dto.response.CondicaoResponse;
 import br.com.fiap.monitoramentomottu.entity.Condicao;
 import br.com.fiap.monitoramentomottu.mappers.CondicaoMapper;
 import br.com.fiap.monitoramentomottu.repository.CondicaoRepository;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
+import br.com.fiap.monitoramentomottu.service.impl.ICondicaoService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class CondicaoService {
+public class CondicaoService implements ICondicaoService {
     private final CondicaoRepository condicaoRepository;
     private final CondicaoMapper mapper;
     public CondicaoService(CondicaoRepository condicaoRepository, CondicaoMapper mapper) {

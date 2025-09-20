@@ -1,21 +1,22 @@
 package br.com.fiap.monitoramentomottu.service;
 
-import br.com.fiap.monitoramentomottu.dto.Localizacao.LocalizacaoRequest;
-import br.com.fiap.monitoramentomottu.dto.Uwb.UwbRequest;
-import br.com.fiap.monitoramentomottu.dto.Uwb.UwbResponse;
+import br.com.fiap.monitoramentomottu.dto.request.LocalizacaoRequest;
+import br.com.fiap.monitoramentomottu.dto.request.UwbRequest;
+import br.com.fiap.monitoramentomottu.dto.response.UwbResponse;
 import br.com.fiap.monitoramentomottu.entity.Moto;
 import br.com.fiap.monitoramentomottu.entity.Uwb;
 import br.com.fiap.monitoramentomottu.mappers.LocalizacaoMapper;
 import br.com.fiap.monitoramentomottu.mappers.UwbMapper;
 import br.com.fiap.monitoramentomottu.repository.MotoRepository;
 import br.com.fiap.monitoramentomottu.repository.UwbRepository;
+import br.com.fiap.monitoramentomottu.service.impl.IUwbService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class UwbService {
+public class UwbService implements IUwbService {
 
     private final UwbRepository uwbRepository;
     private final MotoRepository motoRepository;

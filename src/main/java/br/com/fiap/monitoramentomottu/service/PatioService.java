@@ -1,12 +1,13 @@
 package br.com.fiap.monitoramentomottu.service;
 
-import br.com.fiap.monitoramentomottu.dto.Patio.PatioRequest;
-import br.com.fiap.monitoramentomottu.dto.Patio.PatioResponse;
+import br.com.fiap.monitoramentomottu.dto.request.PatioRequest;
+import br.com.fiap.monitoramentomottu.dto.response.PatioResponse;
 import br.com.fiap.monitoramentomottu.entity.*;
 import br.com.fiap.monitoramentomottu.mappers.PatioMapper;
 import br.com.fiap.monitoramentomottu.repository.FilialRepository;
 import br.com.fiap.monitoramentomottu.repository.MotoRepository;
 import br.com.fiap.monitoramentomottu.repository.PatioRepository;
+import br.com.fiap.monitoramentomottu.service.impl.IPatioService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class PatioService {
+public class PatioService implements IPatioService {
     private final MotoRepository motoRepository;
     private final PatioRepository patioRepository;
     private final FilialRepository filialRepository;

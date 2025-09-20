@@ -1,6 +1,6 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.dto.Localizacao.LocalizacaoRequest;
+import br.com.fiap.monitoramentomottu.dto.request.LocalizacaoRequest;
 import br.com.fiap.monitoramentomottu.entity.Localizacao;
 import org.springframework.stereotype.Component;
 

@@ -1,9 +1,9 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.controller.Rest.FiliaRestController;
-import br.com.fiap.monitoramentomottu.dto.Filial.FilialRequest;
-import br.com.fiap.monitoramentomottu.dto.Filial.FilialResponse;
-import br.com.fiap.monitoramentomottu.dto.Patio.PatioResponse;
+import br.com.fiap.monitoramentomottu.controller.rest.FilialRestController;
+import br.com.fiap.monitoramentomottu.dto.request.FilialRequest;
+import br.com.fiap.monitoramentomottu.dto.response.FilialResponse;
+import br.com.fiap.monitoramentomottu.dto.response.PatioResponse;
 import br.com.fiap.monitoramentomottu.entity.Filial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
@@ -38,8 +38,8 @@ public class FilialMapper {
         Link link = null;
         try {
             link = self
-                    ? linkTo(methodOn(FiliaRestController.class).getById(filial.getId())).withSelfRel()
-                    : linkTo(methodOn(FiliaRestController.class).getById(0L)).withRel("Lista de Filiais");
+                    ? linkTo(methodOn(FilialRestController.class).getById(filial.getId())).withSelfRel()
+                    : linkTo(methodOn(FilialRestController.class).getById(0L)).withRel("Lista de Filiais");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

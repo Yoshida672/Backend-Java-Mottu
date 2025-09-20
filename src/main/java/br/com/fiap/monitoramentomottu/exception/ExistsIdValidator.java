@@ -1,6 +1,6 @@
 package br.com.fiap.monitoramentomottu.exception;
 
-import br.com.fiap.monitoramentomottu.dto.Anotacao.ExistsId;
+import br.com.fiap.monitoramentomottu.dto.anotacao.ExistsId;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.validation.ConstraintValidator;

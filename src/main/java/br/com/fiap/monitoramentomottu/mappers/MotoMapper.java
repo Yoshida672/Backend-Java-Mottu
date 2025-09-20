@@ -1,8 +1,8 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.controller.Rest.MotoRestController;
-import br.com.fiap.monitoramentomottu.dto.Moto.MotoRequest;
-import br.com.fiap.monitoramentomottu.dto.Moto.MotoResponse;
+import br.com.fiap.monitoramentomottu.controller.rest.MotoRestController;
+import br.com.fiap.monitoramentomottu.dto.request.MotoRequest;
+import br.com.fiap.monitoramentomottu.dto.response.MotoResponse;
 import br.com.fiap.monitoramentomottu.entity.*;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Component;

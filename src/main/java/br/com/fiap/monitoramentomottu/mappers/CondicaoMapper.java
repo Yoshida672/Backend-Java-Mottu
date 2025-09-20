@@ -1,9 +1,9 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.controller.Rest.CondicaoRestController;
+import br.com.fiap.monitoramentomottu.controller.rest.CondicaoRestController;
 
-import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoRequest;
-import br.com.fiap.monitoramentomottu.dto.Condicao.CondicaoResponse;
+import br.com.fiap.monitoramentomottu.dto.request.CondicaoRequest;
+import br.com.fiap.monitoramentomottu.dto.response.CondicaoResponse;
 
 import br.com.fiap.monitoramentomottu.entity.Condicao;
 

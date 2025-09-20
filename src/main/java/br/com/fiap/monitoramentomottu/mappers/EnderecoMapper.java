@@ -1,7 +1,7 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.dto.Endereco.EnderecoRequest;
-import br.com.fiap.monitoramentomottu.dto.Endereco.EnderecoResponse;
+import br.com.fiap.monitoramentomottu.dto.request.EnderecoRequest;
+import br.com.fiap.monitoramentomottu.dto.response.EnderecoResponse;
 import br.com.fiap.monitoramentomottu.entity.Endereco;
 import org.springframework.stereotype.Component;
 

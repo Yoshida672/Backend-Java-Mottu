@@ -1,10 +1,11 @@
 package br.com.fiap.monitoramentomottu.service;
 
-import br.com.fiap.monitoramentomottu.dto.Moto.MotoRequest;
-import br.com.fiap.monitoramentomottu.dto.Moto.MotoResponse;
+import br.com.fiap.monitoramentomottu.dto.request.MotoRequest;
+import br.com.fiap.monitoramentomottu.dto.response.MotoResponse;
 import br.com.fiap.monitoramentomottu.entity.*;
 import br.com.fiap.monitoramentomottu.mappers.MotoMapper;
 import br.com.fiap.monitoramentomottu.repository.*;
+import br.com.fiap.monitoramentomottu.service.impl.IMotoService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -16,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class MotoService {
+public class MotoService implements IMotoService {
 
     private final MotoRepository motoRepository;
     private final CondicaoRepository condicaoRepository;

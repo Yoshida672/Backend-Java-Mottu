@@ -1,9 +1,9 @@
 package br.com.fiap.monitoramentomottu.mappers;
 
-import br.com.fiap.monitoramentomottu.controller.Rest.UwbRestController;
-import br.com.fiap.monitoramentomottu.dto.Uwb.UwbRequest;
-import br.com.fiap.monitoramentomottu.dto.Uwb.UwbResponse;
-import br.com.fiap.monitoramentomottu.dto.Localizacao.LocalizacaoResponse;
+import br.com.fiap.monitoramentomottu.controller.rest.UwbRestController;
+import br.com.fiap.monitoramentomottu.dto.request.UwbRequest;
+import br.com.fiap.monitoramentomottu.dto.response.UwbResponse;
+import br.com.fiap.monitoramentomottu.dto.response.LocalizacaoResponse;
 import br.com.fiap.monitoramentomottu.entity.Moto;
 import br.com.fiap.monitoramentomottu.entity.Uwb;
 import br.com.fiap.monitoramentomottu.entity.Localizacao;

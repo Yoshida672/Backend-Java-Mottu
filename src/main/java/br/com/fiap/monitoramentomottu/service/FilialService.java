@@ -1,11 +1,12 @@
 package br.com.fiap.monitoramentomottu.service;
 
-import br.com.fiap.monitoramentomottu.dto.Filial.FilialRequest;
-import br.com.fiap.monitoramentomottu.dto.Filial.FilialResponse;
+import br.com.fiap.monitoramentomottu.dto.request.FilialRequest;
+import br.com.fiap.monitoramentomottu.dto.response.FilialResponse;
 import br.com.fiap.monitoramentomottu.entity.Filial;
 import br.com.fiap.monitoramentomottu.mappers.EnderecoMapper;
 import br.com.fiap.monitoramentomottu.mappers.FilialMapper;
 import br.com.fiap.monitoramentomottu.repository.FilialRepository;
+import br.com.fiap.monitoramentomottu.service.impl.IFilialService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class FilialService {
+public class FilialService implements IFilialService {
 
     private final FilialRepository filialRepository;
     private final FilialMapper filialMapper;
