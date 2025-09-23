@@ -6,6 +6,8 @@ import br.com.fiap.monitoramentomottu.entity.*;
 import br.com.fiap.monitoramentomottu.mappers.MotoMapper;
 import br.com.fiap.monitoramentomottu.repository.*;
 import br.com.fiap.monitoramentomottu.service.impl.IMotoService;
+import br.com.fiap.monitoramentomottu.service.processor.BuscaMotosProcessorFactory;
+import br.com.fiap.monitoramentomottu.service.processor.search.TiposBuscaMoto;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -23,12 +25,14 @@ public class MotoService implements IMotoService {
     private final CondicaoRepository condicaoRepository;
     private final PatioRepository patioRepository;
     private final MotoMapper mapper;
+    private final BuscaMotosProcessorFactory processorFactory;
 
-    public MotoService(MotoRepository motoRepository, CondicaoRepository condicaoRepository, PatioRepository patioRepository, MotoMapper mapper) {
+    public MotoService(MotoRepository motoRepository, CondicaoRepository condicaoRepository, PatioRepository patioRepository, MotoMapper mapper, BuscaMotosProcessorFactory processorFactory) {
         this.motoRepository = motoRepository;
         this.condicaoRepository = condicaoRepository;
         this.patioRepository = patioRepository;
         this.mapper = mapper;
+        this.processorFactory = processorFactory;
     }
 
     @Transactional
@@ -127,36 +131,20 @@ public class MotoService implements IMotoService {
     @CacheEvict(value = "motos", allEntries = true)
     public void cleanAllMotosCache() {
     }
-    public List<MotoResponse> buscarMotos(
-            String modelo,
-            String condicao) {
+    public List<MotoResponse> buscarMotos(TiposBuscaMoto tiposBuscaMoto, String modelo, String condicao) {
 
-        List<Moto> resultado;
+        List<Moto> resultado = processorFactory.getProcessor(tiposBuscaMoto).search(modelo,condicao);
 
-        if (modelo != null) {
-            try{
-                Modelo modelo1 = Modelo.valueOf(modelo.toUpperCase());
-                resultado = motoRepository.findByModelo(modelo1);
-            }
-            catch (Exception e){
-                System.out.println("Nao foi possivel, "+e);
-                resultado = motoRepository.findAll();
-            }
-        }
-        else if (condicao != null) {
-            resultado = motoRepository.findByCondicaoNomeIgnoreCase(condicao);
-        } else {
-            resultado = motoRepository.findAll();
-        }
-
-        List<MotoResponse> resposta = resultado.stream().map((Moto moto) -> {
-            try {
-                return mapper.MotoToResponse(moto,true);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }).toList();
-        return resposta;
+        return resultado.stream()
+                .map(moto -> {
+                    try {
+                        return mapper.MotoToResponse(moto, true);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .toList();
     }
+
 
 }

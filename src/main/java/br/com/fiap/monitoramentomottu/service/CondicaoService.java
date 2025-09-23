@@ -21,6 +21,7 @@ public class CondicaoService implements ICondicaoService {
     }
 
     @Transactional
+
     public CondicaoResponse create(CondicaoRequest dto) throws Exception{
         Condicao condicao = mapper.RequestToCondicao(dto);
         condicao.setCor(dto.cor());

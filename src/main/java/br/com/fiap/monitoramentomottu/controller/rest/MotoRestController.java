@@ -4,6 +4,7 @@ import br.com.fiap.monitoramentomottu.controller.rest.impl.IRestMotoController;
 import br.com.fiap.monitoramentomottu.dto.request.MotoRequest;
 import br.com.fiap.monitoramentomottu.dto.response.MotoResponse;
 import br.com.fiap.monitoramentomottu.service.MotoService;
+import br.com.fiap.monitoramentomottu.service.processor.search.TiposBuscaMoto;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,10 +59,11 @@ public class MotoRestController implements IRestMotoController {
     }
     @GetMapping("/buscar")
     public ResponseEntity<List<MotoResponse>> buscarMotos(
+            @RequestParam(required = true) TiposBuscaMoto tipoBusca,
             @RequestParam(required = false)  String modelo,
             @RequestParam(required = false) String condicao) {
 
-        List<MotoResponse> resposta = service.buscarMotos(modelo, condicao);
+        List<MotoResponse> resposta = service.buscarMotos(tipoBusca,modelo, condicao);
         return ResponseEntity.ok(resposta);
     }
 

@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface MotoRepository extends JpaRepository<Moto, Long> {
     boolean existsByPlaca(String placa);
-    List<Moto> findByIdIn(List<Long> motosIds);
+    List<Moto> findByModeloAndCondicaoNomeIgnoreCase(Modelo modelo, String condicao);
     List<Moto> findByModelo(Modelo modelo);
     List<Moto> findByCondicaoNomeIgnoreCase(String nome);
 }
