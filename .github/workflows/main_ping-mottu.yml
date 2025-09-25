@@ -35,7 +35,7 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'ping-mottu-rm558763'
+        app-name: 'ping-mottu'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_6ab2c75d730849aeb62ee9684ecc605e }}
         package: ${{ env.JAR }}
