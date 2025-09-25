@@ -37,5 +37,5 @@ jobs:
       with:
         app-name: 'ping-mottu-rm558763'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile }}
+        publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BFA6314D456149098BE7368DC1E524CC}}
         package: ${{ env.JAR }}
