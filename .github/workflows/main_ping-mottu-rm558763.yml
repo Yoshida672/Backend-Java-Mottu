@@ -27,11 +27,15 @@ jobs:
           SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
           SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
       run: ./gradlew build
+    
+    - name: Find the latest JAR file
+      id: find-jar
+      run: echo "JAR=$(find $GITHUB_WORKSPACE/build/libs -name '*.jar' -print -quit)" >> $GITHUB_ENV
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
-      with: 
+      with:
         app-name: 'ping-mottu-rm558763'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_bfa6314d456149098be7368dc1e524cc }}
-        package: '${{ github.workspace }}/build/libs/*.jar'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile }}
+        package: ${{ env.JAR }}
