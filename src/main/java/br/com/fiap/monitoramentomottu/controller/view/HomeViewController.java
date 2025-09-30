@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeViewController {
     @GetMapping
     public String home(Model model, @AuthenticationPrincipal UserDetails userDetails){
-        model.addAttribute("username",userDetails.getUsername());
+        model.addAttribute("user", userDetails);
         return "home";
+    }
+    @GetMapping("/logout")
+    public String logout(){
+        return "redirect:/login";
     }
 }

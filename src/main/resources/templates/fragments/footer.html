@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PingMottu</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        .footer{
+            background: green;
+        }
+        .social-icons {
+            margin: 10px 0;
+        }
+        .social-icons a {
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: #ffffff;
+            margin: 0 10px;
+            transition: color 0.2s;
+        }
+        .social-icons a:hover {
+            color: #808080;
+        }
+    </style>
+</head>
+<body>
+
+<footer th:fragment="footer" class="footer text-center py-4">
+    <p>&copy; 2025 - PingMottu.</p>
+    <div class="social-icons">
+        <a href="https://github.com/Yoshida672/Backend-Java-Mottu.git"
+           target="_blank" class="fab fa-github"></a>
+    </div>
+</footer>
+
+</body>
+</html>

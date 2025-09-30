@@ -1,0 +1,52 @@
+<th:block th:fragment="header">
+    <header class="header">
+        <style>
+            .header {
+                width: 100%;
+            }
+
+            .navbar {
+                background: green;
+                padding: 10px 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .navbar .container-fluid {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            h1 {
+                color: #fff;
+                margin: 0;
+            }
+
+            .profile-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+
+            .separator {
+                height: 20px;
+                width: 100%;
+            }
+        </style>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+                <h1>PINGMOTTU</h1>
+
+                <div th:replace="~{fragments/menu :: menu}"></div>
+
+                <img th:src="@{/images/iconePerfil.png}" class="profile-icon" alt="Perfil"/>
+            </div>
+        </nav>
+    </header>
+
+    <div class="separator"></div>
+</th:block>

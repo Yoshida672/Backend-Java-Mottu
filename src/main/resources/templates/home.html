@@ -1,11 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8"/>
+    <title>MotoTrack</title>
+    <script th:src="@{/js/menu.js}" defer></script>
+
 </head>
 <body>
-<div>
-    <h1 th:text="${username}">Nome Usuario</h1>
-</div>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<section class="banner">
+    <img th:src="@{/images/backgroundMottu.png}" alt="Banner"/>
+</section>
+
+<main class="content">
+    <h2>Bem-Vindo ao Moto Track, um sistema de gestão de motos com UWDTags.</h2>
+    <p>Este sistema visa controlar e mapear motos usando etiquetas UWD.</p>
+
+    <a th:if="${user == null}" th:href="@{/login}" class="btn">
+        Acessar como funcionário
+    </a>
+
+    <a th:if="${user != null}" th:href="@{/dashboard}" class="btn">
+        Bem-vindo, <span th:text="${user.username}">Usuário</span>!
+    </a>
+</main>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
 </body>
 </html>

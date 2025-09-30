@@ -1,0 +1,92 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:fragment="menu">
+    <style>
+        .menu-lateral {
+            background: transparent;
+            color: #fff;
+            position: static;
+            width: auto;
+            height: auto;
+            padding: 0;
+        }
+
+        .menu-lateral ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu-lateral li {
+            margin: 0;
+        }
+
+        .menu-lateral a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+        }
+
+        .menu-lateral a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        #toggleMenu {
+            display: none;
+        }
+
+        .banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .content {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #4C3BCF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #372a99;
+        }
+    </style>
+
+    <nav id="menuLateral" class="menu-lateral" role="navigation">
+        <button id="toggleMenu" aria-label="Abrir/Fechar Menu">☰</button>
+        <ul>
+            <li><a th:href="@{/}">&gt; Início</a></li>
+            <li th:if="${user == null}"><a th:href="@{/login}">&gt; Login</a></li>
+            <li th:if="${user == null}"><a th:href="@{/cadastroMoto}">&gt; Cadastro</a></li>
+            <li th:if="${user != null}"><a th:href="@{/perfil}">&gt; Perfil</a></li>
+            <li th:if="${user != null}"><a th:href="@{/logout}">&gt; Logout</a></li>
+            <li><a th:href="@{/listaMotos}">&gt; Lista</a></li>
+        </ul>
+    </nav>
+</th:block>
+
+</html>
