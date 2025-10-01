@@ -25,6 +25,8 @@ public class EnderecoMapper {
 
     }
     public EnderecoResponse EnderecoToResponse(Endereco endereco, boolean self) {
+        if (endereco == null) return null;
+
         return new EnderecoResponse(
                 endereco.getNumero(),
                 endereco.getCep(),
@@ -34,4 +36,5 @@ public class EnderecoMapper {
                 endereco.getLogradouro()
         );
     }
+
 }

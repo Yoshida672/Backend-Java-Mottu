@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Filiais</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #00994d;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #e6e6e6;
+        }
+        .actions a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #00994d;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .actions a.delete {
+            background-color: #cc0000;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination a, .pagination span {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #00994d;
+        }
+        .new-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #00994d;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Lista de Filiais</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>CNPJ</th>
+        <th>Ano</th>
+        <th>Endereço</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="filial : ${filiais.content}">
+        <td th:text="${filial.id}"></td>
+        <td th:text="${filial.nome}"></td>
+        <td th:text="${filial.cnpj}"></td>
+        <td th:text="${filial.ano}"></td>
+        <td>
+            <span th:if="${filial.endereco != null}" th:text="${filial.endereco.bairro + ', ' + filial.endereco.cidade}"></span>
+            <span th:if="${filial.endereco == null}">
+            Não cadastrado
+            <a th:href="@{/filiais/enderecos/nova(filialId=${filial.id})}"
+               style="color: #00994d; text-decoration: none; font-weight: bold; margin-left: 5px;">+</a>
+        </span>
+        </td>
+        <td class="actions">
+            <a th:href="@{/filiais/editar/{id}(id=${filial.id})}">Editar</a>
+            <a th:href="@{/filiais/deletar/{id}(id=${filial.id})}" class="delete">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+<div class="pagination">
+    <a th:if="${filiais.hasPrevious()}" th:href="@{/filiais/listar(page=${filiais.number - 1})}">Anterior</a>
+
+    <span>
+        Página <span th:text="${filiais.totalPages == 0 ? 1 : filiais.number + 1}"></span>
+        de <span th:text="${filiais.totalPages == 0 ? 1 : filiais.totalPages}"></span>
+    </span>
+
+    <a th:if="${filiais.hasNext()}" th:href="@{/filiais/listar(page=${filiais.number + 1})}">Próximo</a>
+</div>
+
+<a th:href="@{/filiais/nova}" class="new-btn">Nova Filial</a>
+
+</body>
+</html>

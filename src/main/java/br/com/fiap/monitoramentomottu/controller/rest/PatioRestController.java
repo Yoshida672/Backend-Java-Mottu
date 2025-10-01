@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/patios")
+@RequestMapping("api/patios")
 public class PatioRestController implements IRestPatioController {
     private final PatioService service;
 

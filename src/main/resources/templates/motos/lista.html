@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Motos</title>
+</head>
+<body>
+<h1>Lista de Motos</h1>
+
+<a th:href="@{/motos/nova}">Nova Moto</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Placa</th>
+        <th>Modelo</th>
+        <th>Condição</th>
+        <th>Patio / Filial</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="moto : ${motos.content}">
+        <td th:text="${moto.id}"></td>
+        <td th:text="${moto.placa}"></td>
+        <td th:text="${moto.modelo}"></td>
+        <td th:text="${moto.condicao}"></td>
+        <td th:text="${moto.filial}"></td>
+        <td>
+            <a th:href="@{/motos/editar/{id}(id=${moto.id})}">Editar</a> |
+            <a th:href="@{/motos/deletar/{id}(id=${moto.id})}"
+               onclick="return confirm('Tem certeza que deseja deletar?');">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

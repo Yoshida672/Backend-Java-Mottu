@@ -81,7 +81,9 @@
         <ul>
             <li><a th:href="@{/}">&gt; Início</a></li>
             <li th:if="${user == null}"><a th:href="@{/login}">&gt; Login</a></li>
-            <li th:if="${user == null}"><a th:href="@{/cadastroMoto}">&gt; Cadastro</a></li>
+            <li th:if="${user != null}"><a th:href="@{/filiais/listar}">&gt; Cadastro de Moto</a></li>
+            <li th:if="${user != null}"><a th:href="@{/filiais/nova}">&gt; Cadastro de Filial</a></li>
+
             <li th:if="${user != null}"><a th:href="@{/perfil}">&gt; Perfil</a></li>
             <li th:if="${user != null}"><a th:href="@{/logout}">&gt; Logout</a></li>
             <li><a th:href="@{/listaMotos}">&gt; Lista</a></li>

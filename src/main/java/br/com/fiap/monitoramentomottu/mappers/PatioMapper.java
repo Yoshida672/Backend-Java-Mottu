@@ -38,7 +38,7 @@ public class PatioMapper {
                 patio.getQtdMoto(),
                 patio.getAreaPatio(),
                 patio.getCapacidadeMoto(),
-                patio.getFilial().getNome(),
+                patio.getFilial().getId(),
                 link
 
         );

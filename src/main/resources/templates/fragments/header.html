@@ -3,14 +3,18 @@
         <style>
             .header {
                 width: 100%;
+                top: 0;
+                left: 0;
             }
 
             .navbar {
-                background: green;
-                padding: 10px 20px;
+                width: 100%;
+                background: #123b1d;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                padding: 10px 20px;
+                box-sizing: border-box;
             }
 
             .navbar .container-fluid {
@@ -21,14 +25,16 @@
             }
 
             h1 {
-                color: #fff;
+                color: #6bed8d;
                 margin: 0;
+                font-size: 24px;
             }
 
             .profile-icon {
                 width: 40px;
                 height: 40px;
                 border-radius: 50%;
+                cursor: pointer;
             }
 
             .separator {
@@ -39,7 +45,7 @@
 
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <h1>PINGMOTTU</h1>
+                <h1>Ping Mottu</h1>
 
                 <div th:replace="~{fragments/menu :: menu}"></div>
 

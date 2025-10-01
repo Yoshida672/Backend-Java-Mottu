@@ -14,8 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 @RestController
-@RequestMapping("/tags")
-public class UwbRestController implements IRestUwbController {
+@RequestMapping("api/tags")
+public class    UwbRestController implements IRestUwbController {
     private final UwbService service;
 
 

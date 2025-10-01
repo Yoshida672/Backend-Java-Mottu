@@ -2,6 +2,7 @@ package br.com.fiap.monitoramentomottu.mappers;
 
 import br.com.fiap.monitoramentomottu.controller.rest.FilialRestController;
 import br.com.fiap.monitoramentomottu.dto.request.FilialRequest;
+import br.com.fiap.monitoramentomottu.dto.response.EnderecoResponse;
 import br.com.fiap.monitoramentomottu.dto.response.FilialResponse;
 import br.com.fiap.monitoramentomottu.dto.response.PatioResponse;
 import br.com.fiap.monitoramentomottu.entity.Filial;
@@ -29,13 +30,15 @@ public class FilialMapper {
         filial.setNome(dto.nome());
         filial.setCnpj(dto.cnpj());
         filial.setAno(dto.ano());
-        filial.setEndereco(
-                enderecoMapper.RequestToEndereco(dto.endereco()));
+
         return filial;
     }
 
     public FilialResponse FilialToResponse(Filial filial, boolean self) {
         Link link = null;
+        EnderecoResponse enderecoResponse = filial.getEndereco() != null
+                ? enderecoMapper.EnderecoToResponse(filial.getEndereco(), false)
+                : null;
         try {
             link = self
                     ? linkTo(methodOn(FilialRestController.class).getById(filial.getId())).withSelfRel()
@@ -61,9 +64,22 @@ public class FilialMapper {
                 filial.getNome(),
                 filial.getCnpj(),
                 filial.getAno(),
-                enderecoMapper.EnderecoToResponse(filial.getEndereco(), false),
+               enderecoResponse,
                 patios,
                 link
         );
     }
+    public FilialResponse toSimpleResponse(Filial filial) {
+        return new FilialResponse(
+                filial.getId(),
+                filial.getNome(),
+                null,  // CNPJ não precisa
+                filial.getAno(),  // Ano não precisa
+                null,  // Endereço não precisa
+                null,  // Patios não precisa
+                null   // Link não precisa
+        );
+    }
+
+
 }

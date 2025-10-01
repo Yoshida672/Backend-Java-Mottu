@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Moto</title>
+</head>
+<body>
+<h1 th:text="${#strings.isEmpty(moto.id) ? 'Nova Moto' : 'Editar Moto'}"></h1>
+
+<form th:action="@{/motos/salvar}" th:object="${moto}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>Placa:</label>
+    <input type="text" th:field="*{placa}" placeholder="ABC1D23 ou AAA-1234" />
+    <div th:if="${#fields.hasErrors('placa')}" th:errors="*{placa}"></div>
+
+    <label>Modelo:</label>
+    <select th:field="*{modelo}">
+        <option value="">-- Selecione --</option>
+        <option th:each="m : ${T(br.com.fiap.monitoramentomottu.entity.Modelo).values()}"
+                th:value="${m}"
+                th:text="${m}"
+                th:selected="${m == moto?.modelo}">
+        </option>
+    </select>
+
+    <label>Condição:</label>
+    <select th:field="*{condicaoId}">
+        <option value="">-- Selecione --</option>
+        <option th:each="cond : ${condicoes}"
+                th:value="${cond.id}"
+                th:text="${cond.nome}"
+                th:selected="${moto.condicaoId == cond.id}">
+        </option>
+    </select>
+    <div th:if="${#fields.hasErrors('condicaoId')}" th:errors="*{condicaoId}"></div>
+
+    <label>Patio:</label>
+    <select th:field="*{patioId}">
+        <option value="">-- Selecione --</option>
+        <option th:each="patio : ${patios}"
+                th:value="${patio.id}"
+                th:text="${patio.filial.nome + ' - Area ' + patio.areaPatio}"
+                th:selected="${patio.id == moto?.patioId}">
+        </option>
+    </select>
+    <div th:if="${#fields.hasErrors('patioId')}" th:errors="*{patioId}"></div>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<a th:href="@{/motos/listar}">Voltar à lista</a>
+</body>
+</html>

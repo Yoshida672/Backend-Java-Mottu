@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Pátio</title>
+    <style>
+        input, select { width: 300px; padding: 8px; margin-bottom: 12px; }
+        label { display: block; margin-top: 12px; }
+        button { padding: 10px 20px; background-color: #00994d; color: white; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+<h1>Cadastro de Pátio</h1>
+
+<form
+      th:action="@{/patios/salvar}"
+      th:object="${patio}"
+      method="post"
+    style="background:#6bed8d; padding:30px 40px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.15); width:300px; display:flex; flex-direction:column; gap:15px;">
+
+
+    <input type="hidden" th:field="*{id}">
+
+    <label>Área do Pátio (m²):</label>
+    <input type="number" th:field="*{area}" />
+
+    <label>Capacidade Máxima de Motos:</label>
+    <input type="number" th:field="*{capacidadeMax}" />
+
+    <label>Filial:</label>
+    <select th:field="*{filialId}" th:if="${patio.filialId == null}">
+        <option value="">-- Selecione --</option>
+        <option th:each="filial : ${filiais}"
+                th:value="${filial.id}"
+                th:text="${filial.nome}">
+        </option>
+    </select>
+
+    <br/>
+    <button type="submit">Salvar Pátio</button>
+</form>
+
+
+
+<a th:href="@{/patios/listar}">Voltar para lista</a>
+
+
+
+
+</body>
+</html>

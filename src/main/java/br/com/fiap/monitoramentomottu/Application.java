@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 @EnableCaching
 @OpenAPIDefinition(info = @Info(title = "API TESTE",description = "Exemplo de API RESTful com Swagger",version = "v1"))
+
 public class  Application {
 
 	public static void main(String[] args) {

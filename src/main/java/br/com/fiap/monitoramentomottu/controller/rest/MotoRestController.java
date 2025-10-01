@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/motos")
+@RequestMapping("api/motos")
 public class MotoRestController implements IRestMotoController {
 
     private final MotoService service;

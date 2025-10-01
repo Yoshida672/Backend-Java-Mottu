@@ -3,61 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Condições</title>
-    <style>
-        table { border-collapse: collapse; width: 50%; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f0f0f0; }
-        .pagination { margin-top: 20px; }
-        .pagination a { margin: 0 5px; text-decoration: none; }
-        .pagination span { margin: 0 5px; }
-    </style>
 </head>
-<body>
+<body style="margin:0; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; background: #c8fad5; font-family:Arial, Helvetica, sans-serif;">
 
-<h1>Lista de Condições</h1>
+<h1 style="margin-bottom:20px;">Lista de Condições</h1>
 
-<table>
+<table style="border-collapse:collapse; width:60%; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Cor</th>
+        <th style="border:1px solid #0d2113; padding:10px; background:#123b1d; text-align:center; color:#b8f5c8;">ID</th>
+        <th style="border:1px solid #0d2113; padding:10px; background:#123b1d; text-align:center; color:#b8f5c8;">Nome</th>
+        <th style="border:1px solid #0d2113; padding:10px; background:#123b1d; text-align:center; color:#b8f5c8;">Cor</th>
+        <th style="border:1px solid #0d2113; padding:10px; background:#123b1d; text-align:center; color:#b8f5c8;">Ações</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="condicao : ${condicoes.content}">
-        <td th:text="${condicao.id}"></td>
-        <td th:text="${condicao.nome}"></td>
-        <td th:text="${condicao.cor}"></td>
-        <td class="p-3">
-            <a class="text-blue-600 hover:underline" th:href="@{/condicoes/editar/{id}(id=${condicao.id})}">Editar</a>
-            <a class="text-blue-600 hover:underline" th:href="@{/condicoes/deletar/{id}(id=${condicao.id})}">Deletar</a>
+        <td style="border:1px solid #0d2113; padding:10px; text-align:center; background:#6bed8d;" th:text="${condicao.id}"></td>
+        <td style="border:1px solid #0d2113; padding:10px; text-align:center; background:#6bed8d;" th:text="${condicao.nome}"></td>
+        <td style="border:1px solid #0d2113; padding:10px; text-align:center; background:#6bed8d;" th:text="${condicao.cor}"></td>
+        <td style="border:1px solid #0d2113; padding:10px; text-align:center; background:#6bed8d;">
+            <a th:href="@{/condicoes/editar/{id}(id=${condicao.id})}" style="margin-right:10px; text-decoration:none; font-weight:bold; color:#123b1d;">Editar</a>
+            <a th:href="@{/condicoes/deletar/{id}(id=${condicao.id})}" style="text-decoration:none; font-weight:bold; color:#c2361d;">Deletar</a>
         </td>
     </tr>
     </tbody>
 </table>
 
-<div class="pagination">
-    <a th:if="${condicoes.hasPrevious()}"
-       th:href="@{/condicoes/listar(page=${condicoes.number - 1})}">
-        Anterior
-    </a>
+<div style="margin-top:20px; display:flex; align-items:center; gap:10px;">
+    <a th:if="${condicoes.hasPrevious()}" th:href="@{/condicoes/listar(page=${condicoes.number - 1})}" style="text-decoration:none; font-weight:bold; color:#123b1d;">Anterior</a>
 
     <span>
-    Página <span th:text="${condicoes.totalPages == 0 ? 1 : condicoes.number + 1}"></span>
-    de <span th:text="${condicoes.totalPages == 0 ? 1 : condicoes.totalPages}"></span>
+        Página <span th:text="${condicoes.totalPages == 0 ? 1 : condicoes.number + 1}"></span>
+        de <span th:text="${condicoes.totalPages == 0 ? 1 : condicoes.totalPages}"></span>
     </span>
 
-    <a th:if="${condicoes.hasNext()}"
-       th:href="@{/condicoes/listar(page=${condicoes.number + 1})}">
-        Próximo
-    </a>
+    <a th:if="${condicoes.hasNext()}" th:href="@{/condicoes/listar(page=${condicoes.number + 1})}" style="text-decoration:none; font-weight:bold; color:#123b1d;">Próximo</a>
 </div>
 
-<div style="margin-top: 20px;">
-    <a th:href="@{/condicoes/nova}">Nova Condição</a>
+<div style="margin-top:20px;">
+    <a th:href="@{/condicoes/nova}" style="text-decoration:none; font-weight:bold; border:1px solid #123b1d; padding:8px 12px; border-radius:6px; background:#123b1d; color:#6bed8d;">Nova Condição</a>
 </div>
-
 
 </body>
 </html>

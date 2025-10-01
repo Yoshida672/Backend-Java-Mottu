@@ -3,21 +3,33 @@
 <head>
     <title>Login</title>
 </head>
-<body class="login-container">
+<body class="login-container"
+      style="margin:0; padding:0; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; background:#c0fad0; font-family:Arial, sans-serif;">
 
-<div class="linha"></div>
-
-<div class="topButton">
-    <span class="topButtonText">Login de Funcionário</span>
+<div class="topButton" style="margin-bottom:20px;">
+    <span class="topButtonText" style="font-size:20px; font-weight:bold; color:#0c3818">
+        Login de Funcionário
+    </span>
 </div>
 
-<form th:action="@{/login}" method="post" class="login-form">
-    <div th:if="${param.error}" class="error-msg">Usuário ou senha inválido</div>
+<form th:action="@{/login}" method="post" class="login-form"
+      style="background:#6bed8d; padding:30px 40px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.15); width:300px; display:flex; flex-direction:column; gap:15px;">
 
-    <input type="text" name="username" placeholder="Usuário" class="input"/>
-    <input type="password" name="password" placeholder="Senha" class="input"/>
+    <div th:if="${param.error}" class="error-msg"
+         style="color:#123b1d; font-size:14px; font-weight:bold; margin-bottom:10px; text-align:center;">
+        Usuário ou senha inválidos
+    </div>
 
-    <button type="submit" class="button">Entrar</button>
+    <input type="text" name="username" placeholder="Usuário" class="input"
+           style="padding:10px; border:1px solid #0d2113; border-radius:6px; font-size:14px;"/>
+
+    <input type="password" name="password" placeholder="Senha" class="input"
+           style="padding:10px; border:1px solid #0d2113; border-radius:6px; font-size:14px;"/>
+
+    <button type="submit" class="button"
+            style="padding:12px; border:none; border-radius:6px; font-size:15px; font-weight:bold; cursor:pointer; background:#123b1d; color:#6bed8d;">
+        Entrar
+    </button>
 </form>
 
 <div th:replace="~{fragments/footer :: footer}"></div>

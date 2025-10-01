@@ -13,6 +13,7 @@ public class Moto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @Column(name="placa",unique = true, nullable = false)
     private String placa;
 

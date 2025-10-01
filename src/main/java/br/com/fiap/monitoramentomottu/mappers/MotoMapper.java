@@ -40,6 +40,8 @@ public class MotoMapper {
                 moto.getPlaca(),
                 moto.getModelo().name(),
                 moto.getCondicao().getNome(),
+                moto.getCondicao().getId(),
+                moto.getPatio().getId(),
                 moto.getPatio().getFilial().getNome(),
                 link
 

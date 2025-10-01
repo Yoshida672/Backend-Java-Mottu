@@ -7,7 +7,9 @@ public record MotoResponse (
         String placa,
         String modelo,
         String condicao,
-        String patio,
+        Long condicaoId,
+        Long patioId,
+        String filial,
         Link link
 ) {
 

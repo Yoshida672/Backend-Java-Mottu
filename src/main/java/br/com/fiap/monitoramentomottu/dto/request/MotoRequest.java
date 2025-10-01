@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
 public record MotoRequest(
+        Long id,
         @NotBlank
         @Pattern(
                 regexp = "^[A-Z]{3}\\d[A-Z0-9]\\d{2}$|^[A-Z]{3}-\\d{4}$",

@@ -16,7 +16,7 @@ public class Filial {
     private String cnpj;
     @Column(name="ano", nullable = false)
     private int ano;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_endereco", nullable = false)
     private Endereco endereco;
 

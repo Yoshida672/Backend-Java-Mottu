@@ -1,10 +1,14 @@
 package br.com.fiap.monitoramentomottu.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+
+import java.time.LocalDateTime;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 public record FilialRequest(
+        Long id,
+
         @NotBlank(message = "O nome não pode estar em branco")
         @Size(min = 2, max = 100, message = "O nome deve ter entre 2 e 100 caracteres")
         String nome,
@@ -14,10 +18,9 @@ public record FilialRequest(
         String cnpj,
 
         @NotNull(message = "O ano não pode ser nulo")
-        Integer ano,
+        @Positive
+        @Min(1500)
+        Integer ano) {
 
-        @NotNull(message = "O endereço não pode ser nulo")
-        EnderecoRequest endereco
-) {
 
 }
