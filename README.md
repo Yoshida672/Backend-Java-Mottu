@@ -1,6 +1,6 @@
 # 🛵 Monitoramento Mottu
 
-Este projeto é uma API RESTful para monitoramento de motos, focada em funcionalidades como localização via UWB, estado das motos, filiais e muito mais. Utiliza Spring Boot com Gradle como sistema de build.
+Este projeto é uma API RESTful de monitoramento de motos, que utiliza Spring Boot e Gradle. Com ela, é possível acompanhar em tempo real a localização das motos via UWB, além de consultar o estado de cada moto e a filial onde está registrada.
 
 ---
 
