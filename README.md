@@ -1,4 +1,4 @@
-# 🛵 Monitoramento Mottu
+# 🛵 Ping Mottu
 
 Este projeto é uma API RESTful de monitoramento de motos, que utiliza Spring Boot e Gradle. Com ela, é possível acompanhar em tempo real a localização das motos via UWB, além de consultar o estado de cada moto e a filial onde está registrada.
 
