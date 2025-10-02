@@ -1,5 +1,6 @@
 package br.com.fiap.monitoramentomottu.controller.view;
 
+import br.com.fiap.monitoramentomottu.controller.view.impl.IViewFilialController;
 import br.com.fiap.monitoramentomottu.dto.request.EnderecoRequest;
 import br.com.fiap.monitoramentomottu.dto.request.FilialRequest;
 import br.com.fiap.monitoramentomottu.dto.response.FilialResponse;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/filiais")
-public class FilialViewController {
+public class FilialViewController implements IViewFilialController {
 
     private final FilialService service;
 
@@ -37,6 +38,7 @@ public class FilialViewController {
         model.addAttribute("filial", new FilialRequest(null, null, null, null));
         return "filiais/formulario";
     }
+
 
     @PostMapping("/salvar")
     public String salvar(

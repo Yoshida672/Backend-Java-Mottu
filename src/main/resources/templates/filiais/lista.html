@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <title>Lista de Filiais</title>
@@ -58,6 +60,7 @@
     </style>
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}" style="width:100%;"></div>
 
 <h1>Lista de Filiais</h1>
 
@@ -87,8 +90,11 @@
         </span>
         </td>
         <td class="actions">
+                <span sec:authorize="hasRole('ADMIN')">
+
             <a th:href="@{/filiais/editar/{id}(id=${filial.id})}">Editar</a>
             <a th:href="@{/filiais/deletar/{id}(id=${filial.id})}" class="delete">Deletar</a>
+        </span>
         </td>
     </tr>
     </tbody>
@@ -106,7 +112,7 @@
     <a th:if="${filiais.hasNext()}" th:href="@{/filiais/listar(page=${filiais.number + 1})}">Próximo</a>
 </div>
 
-<a th:href="@{/filiais/nova}" class="new-btn">Nova Filial</a>
+<a th:href="@{/filiais/nova} " class="new-btn" sec:authorize="hasRole('ADMIN')">Nova Filial</a>
 
 </body>
 </html>

@@ -1,15 +1,66 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <title>Lista de Pátios</title>
     <style>
-        table { border-collapse: collapse; width: 80%; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f0f0f0; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #00994d;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #e6e6e6;
+        }
+        .actions a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #00994d;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .actions a.delete {
+            background-color: #cc0000;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination a, .pagination span {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #00994d;
+        }
+        .new-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #00994d;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
+<div th:replace="~{fragments/header :: header}" style="width:100%;"></div>
 
 <h1>Lista de Pátios</h1>
 
@@ -29,17 +80,29 @@
         <td th:text="${patio.area}"></td>
         <td th:text="${patio.qtdMoto}"></td>
         <td th:text="${patio.capacidadeMax}"></td>
-        <td>
-            <a th:href="@{/patios/editar/{id}(id=${patio.id})}">Editar</a>
-            <a th:href="@{/patios/deletar/{id}(id=${patio.id})}">Deletar</a>
+        <td class="actions">
+    <span sec:authorize="hasRole('ADMIN')">
+        <a th:href="@{/patios/editar/{id}(id=${patio.id})}">Editar</a>
+        <a th:href="@{/patios/deletar/{id}(id=${patio.id})}" class="delete">Deletar</a>
+    </span>
         </td>
     </tr>
     </tbody>
 </table>
 
-<div>
-    <a th:href="@{/patios/novo}">+ Novo Pátio</a>
+
+<div  class="pagination">
+    <a th:if="${patios.hasPrevious()}" th:href="@{/patios/listar(page=${patios.number - 1})}" >Anterior</a>
+
+    <span>
+        Página <span th:text="${patios.totalPages == 0 ? 1 : patios.number + 1}"></span>
+        de <span th:text="${patios.totalPages == 0 ? 1 : patios.totalPages}"></span>
+    </span>
+
+    <a th:if="${patios.hasNext()}" th:href="@{/patios/listar(page=${patios.number + 1})}">Próximo</a>
 </div>
+
+<a th:href="@{/patios/novo}" class="new-btn" sec:authorize="hasRole('ADMIN')">Novo Patio</a>
 
 </body>
 </html>

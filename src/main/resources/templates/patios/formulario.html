@@ -4,23 +4,69 @@
     <meta charset="UTF-8">
     <title>Cadastro de Pátio</title>
     <style>
-        input, select { width: 300px; padding: 8px; margin-bottom: 12px; }
-        label { display: block; margin-top: 12px; }
-        button { padding: 10px 20px; background-color: #00994d; color: white; border: none; border-radius: 5px; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #00994d;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            max-width: 400px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #00994d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        a.voltar {
+            display: inline-block;
+            margin-top: 20px;
+            color: #00994d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a.voltar:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
-<h1>Cadastro de Pátio</h1>
+<div th:replace="~{fragments/header :: header}" style="width:100%;"></div>
 
-<form
-      th:action="@{/patios/salvar}"
-      th:object="${patio}"
-      method="post"
-    style="background:#6bed8d; padding:30px 40px; border-radius:12px; box-shadow:0 8px 20px rgba(0,0,0,0.15); width:300px; display:flex; flex-direction:column; gap:15px;">
+<h1 th:text="${#strings.isEmpty(patio.id) ? 'Cadastro de Pátio' : 'Editar Pátio'}"></h1>
 
-
-    <input type="hidden" th:field="*{id}">
+<form th:action="@{/patios/salvar}" th:object="${patio}" method="post">
+    <input type="hidden" th:field="*{id}" />
 
     <label>Área do Pátio (m²):</label>
     <input type="number" th:field="*{area}" />
@@ -29,7 +75,7 @@
     <input type="number" th:field="*{capacidadeMax}" />
 
     <label>Filial:</label>
-    <select th:field="*{filialId}" th:if="${patio.filialId == null}">
+    <select th:field="*{filialId}">
         <option value="">-- Selecione --</option>
         <option th:each="filial : ${filiais}"
                 th:value="${filial.id}"
@@ -37,16 +83,10 @@
         </option>
     </select>
 
-    <br/>
     <button type="submit">Salvar Pátio</button>
 </form>
 
-
-
-<a th:href="@{/patios/listar}">Voltar para lista</a>
-
-
-
+<a th:href="@{/patios/listar}" class="voltar">Voltar para lista</a>
 
 </body>
 </html>

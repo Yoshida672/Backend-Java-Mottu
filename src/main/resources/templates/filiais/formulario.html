@@ -3,8 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastrar/Editar Filial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #00994d;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            max-width: 400px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .error-message {
+            color: #cc0000;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #00994d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        a.voltar {
+            display: inline-block;
+            margin-top: 20px;
+            color: #00994d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a.voltar:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+
+<div th:replace="~{fragments/header :: header}" style="width:100%;"></div>
 
 <h1 th:text="${filial.id != null} ? 'Editar Filial' : 'Cadastrar Filial'"></h1>
 
@@ -12,26 +74,22 @@
 
     <input type="hidden" th:field="*{id}" />
 
-    <div>
-        <label for="nome">Nome:</label>
-        <input id="nome" type="text" th:field="*{nome}" required />
-        <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" style="color:red"></div>
-    </div>
+    <label for="nome">Nome:</label>
+    <input id="nome" type="text" th:field="*{nome}" required />
+    <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="error-message"></div>
 
-    <div>
-        <label for="cnpj">CNPJ:</label>
-        <input id="cnpj" type="text" th:field="*{cnpj}" required />
-        <div th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}" style="color:red"></div>
-    </div>
+    <label for="cnpj">CNPJ:</label>
+    <input id="cnpj" type="text" th:field="*{cnpj}" required />
+    <div th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}" class="error-message"></div>
 
-    <div>
-        <label for="ano">Ano:</label>
-        <input id="ano" type="number" th:field="*{ano}" required />
-        <div th:if="${#fields.hasErrors('ano')}" th:errors="*{ano}" style="color:red"></div>
-    </div>
-    <hr>
+    <label for="ano">Ano:</label>
+    <input id="ano" type="number" th:field="*{ano}" required />
+    <div th:if="${#fields.hasErrors('ano')}" th:errors="*{ano}" class="error-message"></div>
+
     <button type="submit">Salvar Filial</button>
 </form>
+
+<a th:href="@{/filiais/listar}" class="voltar">Voltar para lista</a>
 
 </body>
 </html>

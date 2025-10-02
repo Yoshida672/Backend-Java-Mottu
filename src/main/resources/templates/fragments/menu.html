@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <th:block th:fragment="menu">
     <style>
@@ -79,15 +80,25 @@
     <nav id="menuLateral" class="menu-lateral" role="navigation">
         <button id="toggleMenu" aria-label="Abrir/Fechar Menu">☰</button>
         <ul>
-            <li><a th:href="@{/}">&gt; Início</a></li>
-            <li th:if="${user == null}"><a th:href="@{/login}">&gt; Login</a></li>
-            <li th:if="${user != null}"><a th:href="@{/filiais/listar}">&gt; Cadastro de Moto</a></li>
-            <li th:if="${user != null}"><a th:href="@{/filiais/nova}">&gt; Cadastro de Filial</a></li>
+            <li><a th:href="@{/}">Início</a></li>
 
-            <li th:if="${user != null}"><a th:href="@{/perfil}">&gt; Perfil</a></li>
-            <li th:if="${user != null}"><a th:href="@{/logout}">&gt; Logout</a></li>
-            <li><a th:href="@{/listaMotos}">&gt; Lista</a></li>
+            <!-- Mostrar LOGIN quando NÃO autenticado -->
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}">Login</a>
+            </li>
+
+            <!-- Mostrar demais itens apenas para usuários autenticados -->
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/motos/listar}">Motos</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/filiais/listar}">Filiais</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/condicoes/listar}">Condições</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/patios/listar}">Pátios</a></li>
+
+            <!-- Mostrar LOGOUT quando autenticado -->
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}">Logout</a>
+            </li>
         </ul>
+
     </nav>
 </th:block>
 

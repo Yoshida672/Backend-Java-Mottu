@@ -3,52 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastrar Endereço da Filial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #00994d;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            max-width: 450px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .error-message {
+            color: #cc0000;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #00994d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        a.voltar {
+            display: inline-block;
+            margin-top: 20px;
+            color: #00994d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a.voltar:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
 
-<h1>Cadastrar Endereço para a Filial "<span th:text="${filial.nome}"></span>"</h1>
+<div th:replace="~{fragments/header :: header}" style="width:100%;"></div>
+
+<h1>
+    Cadastrar Endereço para a Filial "<span th:text="${filial.nome}"></span>"
+</h1>
 
 <form th:action="@{/filiais/enderecos/salvar}" th:object="${endereco}" method="post">
     <input type="hidden" name="filialId" th:value="${filial.id}" />
 
-    <div>
-        <label for="cep">CEP:</label>
-        <input id="cep" type="text" th:field="*{cep}" required />
-        <div th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}" style="color:red"></div>
-    </div>
+    <label for="cep">CEP:</label>
+    <input id="cep" type="text" th:field="*{cep}" required />
+    <div th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}" class="error-message"></div>
 
-    <div>
-        <label for="estado">Estado:</label>
-        <input id="estado" type="text" th:field="*{estado}" required />
-        <div th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" style="color:red"></div>
-    </div>
+    <label for="estado">Estado:</label>
+    <input id="estado" type="text" th:field="*{estado}" required />
+    <div th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="error-message"></div>
 
-    <div>
-        <label for="cidade">Cidade:</label>
-        <input id="cidade" type="text" th:field="*{cidade}" required />
-        <div th:if="${#fields.hasErrors('cidade')}" th:errors="*{cidade}" style="color:red"></div>
-    </div>
+    <label for="cidade">Cidade:</label>
+    <input id="cidade" type="text" th:field="*{cidade}" required />
+    <div th:if="${#fields.hasErrors('cidade')}" th:errors="*{cidade}" class="error-message"></div>
 
-    <div>
-        <label for="bairro">Bairro:</label>
-        <input id="bairro" type="text" th:field="*{bairro}" required />
-        <div th:if="${#fields.hasErrors('bairro')}" th:errors="*{bairro}" style="color:red"></div>
-    </div>
+    <label for="bairro">Bairro:</label>
+    <input id="bairro" type="text" th:field="*{bairro}" required />
+    <div th:if="${#fields.hasErrors('bairro')}" th:errors="*{bairro}" class="error-message"></div>
 
-    <div>
-        <label for="logradouro">Logradouro:</label>
-        <input id="logradouro" type="text" th:field="*{logradouro}" required />
-        <div th:if="${#fields.hasErrors('logradouro')}" th:errors="*{logradouro}" style="color:red"></div>
-    </div>
+    <label for="logradouro">Logradouro:</label>
+    <input id="logradouro" type="text" th:field="*{logradouro}" required />
+    <div th:if="${#fields.hasErrors('logradouro')}" th:errors="*{logradouro}" class="error-message"></div>
 
-    <div>
-        <label for="numero">Número:</label>
-        <input id="numero" type="number" th:field="*{numero}" required />
-        <div th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}" style="color:red"></div>
-    </div>
+    <label for="numero">Número:</label>
+    <input id="numero" type="number" th:field="*{numero}" required />
+    <div th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}" class="error-message"></div>
 
     <button type="submit">Salvar Endereço</button>
 </form>
+
+<a th:href="@{/filiais/listar}" class="voltar">Voltar para lista</a>
 
 </body>
 </html>

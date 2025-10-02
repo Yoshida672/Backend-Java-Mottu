@@ -36,7 +36,6 @@ public class MotoService implements IMotoService {
     }
 
     @Transactional
-    @CachePut(value = "motos", key = "#result.id")
     public MotoResponse create(MotoRequest dto) throws Exception {
         if (motoRepository.existsByPlaca(dto.placa())) {
             throw new Exception("Placa já cadastrada!");
@@ -58,7 +57,6 @@ public class MotoService implements IMotoService {
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(value = "motos", key = "#id")
     public MotoResponse getById(Long id) throws Exception {
         Moto moto = motoRepository.findById(id)
                 .orElseThrow(() -> new Exception("Moto não encontrada"));
@@ -66,7 +64,6 @@ public class MotoService implements IMotoService {
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(value = "motos",key = "'all'")
     public Page<MotoResponse> getAll(Pageable pageable) {
         return motoRepository.findAll(pageable)
                 .map(moto-> {
@@ -79,7 +76,6 @@ public class MotoService implements IMotoService {
     }
 
     @Transactional
-    @CachePut(value = "motos", key = "#id")
     public MotoResponse update(Long id, MotoRequest dto) throws Exception {
         Moto moto = motoRepository.findById(id)
                 .orElseThrow(() -> new Exception("Moto não encontrada"));
@@ -116,7 +112,6 @@ public class MotoService implements IMotoService {
     }
 
     @Transactional
-    @CacheEvict(value = "motos", key = "#id")
 
     public void delete(Long id) throws Exception {
         if (!motoRepository.existsById(id)) {
@@ -124,13 +119,7 @@ public class MotoService implements IMotoService {
         }
         motoRepository.deleteById(id);
     }
-    @CacheEvict(value = "motos", key = "'all'")
-    public void cleanMotosListCache() {
-    }
 
-    @CacheEvict(value = "motos", allEntries = true)
-    public void cleanAllMotosCache() {
-    }
     public List<MotoResponse> buscarMotos(TiposBuscaMoto tiposBuscaMoto, String modelo, String condicao) {
 
         List<Moto> resultado = processorFactory.getProcessor(tiposBuscaMoto).search(modelo,condicao);

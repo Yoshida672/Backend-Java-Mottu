@@ -3,8 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Moto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #00994d;
+            margin-bottom: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .error-message {
+            color: #cc0000;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #00994d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        a.voltar {
+            display: inline-block;
+            margin-top: 20px;
+            color: #00994d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a.voltar:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+
+<div th:replace="~{fragments/header :: header}" style="width:100%;"></div>
+
 <h1 th:text="${#strings.isEmpty(moto.id) ? 'Nova Moto' : 'Editar Moto'}"></h1>
 
 <form th:action="@{/motos/salvar}" th:object="${moto}" method="post">
@@ -12,7 +75,7 @@
 
     <label>Placa:</label>
     <input type="text" th:field="*{placa}" placeholder="ABC1D23 ou AAA-1234" />
-    <div th:if="${#fields.hasErrors('placa')}" th:errors="*{placa}"></div>
+    <div th:if="${#fields.hasErrors('placa')}" th:errors="*{placa}" class="error-message"></div>
 
     <label>Modelo:</label>
     <select th:field="*{modelo}">
@@ -33,7 +96,7 @@
                 th:selected="${moto.condicaoId == cond.id}">
         </option>
     </select>
-    <div th:if="${#fields.hasErrors('condicaoId')}" th:errors="*{condicaoId}"></div>
+    <div th:if="${#fields.hasErrors('condicaoId')}" th:errors="*{condicaoId}" class="error-message"></div>
 
     <label>Patio:</label>
     <select th:field="*{patioId}">
@@ -44,11 +107,12 @@
                 th:selected="${patio.id == moto?.patioId}">
         </option>
     </select>
-    <div th:if="${#fields.hasErrors('patioId')}" th:errors="*{patioId}"></div>
+    <div th:if="${#fields.hasErrors('patioId')}" th:errors="*{patioId}" class="error-message"></div>
 
     <button type="submit">Salvar</button>
 </form>
 
-<a th:href="@{/motos/listar}">Voltar à lista</a>
+<a th:href="@{/motos/listar}" class="voltar">Voltar à lista</a>
+
 </body>
 </html>

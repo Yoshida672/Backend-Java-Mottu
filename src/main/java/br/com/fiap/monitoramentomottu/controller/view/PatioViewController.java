@@ -1,5 +1,6 @@
 package br.com.fiap.monitoramentomottu.controller.view;
 
+import br.com.fiap.monitoramentomottu.controller.view.impl.IViewPatioController;
 import br.com.fiap.monitoramentomottu.dto.request.PatioRequest;
 import br.com.fiap.monitoramentomottu.dto.response.PatioResponse;
 import br.com.fiap.monitoramentomottu.service.PatioService;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/patios")
-public class PatioViewController {
+public class PatioViewController implements IViewPatioController {
 
     private final PatioService patioService;
     private final FilialService filialService;
@@ -34,8 +35,9 @@ public class PatioViewController {
         return "patios/lista";
     }
 
+
     @GetMapping("/novo")
-    public String novo(@RequestParam(required = false) Long filialId, Model model) {
+    public String nova(@RequestParam(required = false) Long filialId, Model model) {
         PatioRequest patioRequest;
         if (filialId != null) {
             patioRequest = new PatioRequest(null,0, 0, filialId);

@@ -1,4 +1,5 @@
 package br.com.fiap.monitoramentomottu.controller.view;
+import br.com.fiap.monitoramentomottu.controller.view.impl.IViewMotoController;
 import br.com.fiap.monitoramentomottu.dto.request.MotoRequest;
 import br.com.fiap.monitoramentomottu.dto.response.MotoResponse;
 import br.com.fiap.monitoramentomottu.repository.CondicaoRepository;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/motos")
-public class MotoViewController {
+public class MotoViewController implements IViewMotoController {
 
     private final MotoService motoService;
     private final PatioRepository patioRepository;

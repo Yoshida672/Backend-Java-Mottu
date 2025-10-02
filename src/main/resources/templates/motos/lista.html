@@ -3,11 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Motos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #00994d;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #e6e6e6;
+        }
+        .actions a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #00994d;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .actions a.delete {
+            background-color: #cc0000;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination a, .pagination span {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #00994d;
+        }
+        .new-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #00994d;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-<h1>Lista de Motos</h1>
+<div th:replace="~{fragments/header :: header}" style="width:100%;"></div>
 
-<a th:href="@{/motos/nova}">Nova Moto</a>
+<h1>Lista de Motos</h1>
 
 <table border="1">
     <thead>
@@ -27,14 +80,26 @@
         <td th:text="${moto.modelo}"></td>
         <td th:text="${moto.condicao}"></td>
         <td th:text="${moto.filial}"></td>
-        <td>
+        <td class="actions">
             <a th:href="@{/motos/editar/{id}(id=${moto.id})}">Editar</a> |
             <a th:href="@{/motos/deletar/{id}(id=${moto.id})}"
-               onclick="return confirm('Tem certeza que deseja deletar?');">Deletar</a>
+               onclick="return confirm('Tem certeza que deseja deletar?');" class="delete">Deletar</a>
         </td>
     </tr>
     </tbody>
 </table>
+<div class="pagination">
+    <a th:if="${motos.hasPrevious()}" th:href="@{/motos/listar(page=${motos.number - 1})}">Anterior</a>
+
+    <span>
+        Página <span th:text="${motos.totalPages == 0 ? 1 : motos.number + 1}"></span>
+        de <span th:text="${motos.totalPages == 0 ? 1 : motos.totalPages}"></span>
+    </span>
+
+    <a th:if="${motos.hasNext()}" th:href="@{/motos/listar(page=${motos.number + 1})}">Próximo</a>
+</div>
+
+<a th:href="@{/motos/nova}" class="new-btn">Nova Moto</a>
 
 </body>
 </html>

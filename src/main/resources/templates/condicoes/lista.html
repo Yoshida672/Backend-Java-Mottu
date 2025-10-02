@@ -3,47 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Condições</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #00994d;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #e6e6e6;
+        }
+        .actions a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #00994d;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .actions a.delete {
+            background-color: #cc0000;
+        }
+        .pagination {
+            margin-top: 20px;
+        }
+        .pagination a, .pagination span {
+            margin: 0 5px;
+            text-decoration: none;
+            color: #00994d;
+        }
+        .new-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #00994d;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
-<body style="margin:0; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; background: #c8fad5; font-family:Arial, Helvetica, sans-serif;">
+<body >
+<div th:replace="~{fragments/header :: header}" style="width:100%;"></div>
 
-<h1 style="margin-bottom:20px;">Lista de Condições</h1>
+<h1>Lista de Condições</h1>
 
-<table style="border-collapse:collapse; width:60%; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+<table >
     <thead>
     <tr>
-        <th style="border:1px solid #0d2113; padding:10px; background:#123b1d; text-align:center; color:#b8f5c8;">ID</th>
-        <th style="border:1px solid #0d2113; padding:10px; background:#123b1d; text-align:center; color:#b8f5c8;">Nome</th>
-        <th style="border:1px solid #0d2113; padding:10px; background:#123b1d; text-align:center; color:#b8f5c8;">Cor</th>
-        <th style="border:1px solid #0d2113; padding:10px; background:#123b1d; text-align:center; color:#b8f5c8;">Ações</th>
+        <th >ID</th>
+        <th >Nome</th>
+        <th >Cor</th>
+        <th >Ações</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="condicao : ${condicoes.content}">
-        <td style="border:1px solid #0d2113; padding:10px; text-align:center; background:#6bed8d;" th:text="${condicao.id}"></td>
-        <td style="border:1px solid #0d2113; padding:10px; text-align:center; background:#6bed8d;" th:text="${condicao.nome}"></td>
-        <td style="border:1px solid #0d2113; padding:10px; text-align:center; background:#6bed8d;" th:text="${condicao.cor}"></td>
-        <td style="border:1px solid #0d2113; padding:10px; text-align:center; background:#6bed8d;">
-            <a th:href="@{/condicoes/editar/{id}(id=${condicao.id})}" style="margin-right:10px; text-decoration:none; font-weight:bold; color:#123b1d;">Editar</a>
-            <a th:href="@{/condicoes/deletar/{id}(id=${condicao.id})}" style="text-decoration:none; font-weight:bold; color:#c2361d;">Deletar</a>
+        <td th:text="${condicao.id}"></td>
+        <td th:text="${condicao.nome}"></td>
+        <td th:text="${condicao.cor}"></td>
+        <td class="actions">
+            <a th:href="@{/condicoes/editar/{id}(id=${condicao.id})}" >Editar</a>
+            <a th:href="@{/condicoes/deletar/{id}(id=${condicao.id})}"class="delete">Deletar</a>
         </td>
     </tr>
     </tbody>
 </table>
 
-<div style="margin-top:20px; display:flex; align-items:center; gap:10px;">
-    <a th:if="${condicoes.hasPrevious()}" th:href="@{/condicoes/listar(page=${condicoes.number - 1})}" style="text-decoration:none; font-weight:bold; color:#123b1d;">Anterior</a>
+<div  class="pagination">
+    <a th:if="${condicoes.hasPrevious()}" th:href="@{/condicoes/listar(page=${condicoes.number - 1})}" >Anterior</a>
 
     <span>
         Página <span th:text="${condicoes.totalPages == 0 ? 1 : condicoes.number + 1}"></span>
         de <span th:text="${condicoes.totalPages == 0 ? 1 : condicoes.totalPages}"></span>
     </span>
 
-    <a th:if="${condicoes.hasNext()}" th:href="@{/condicoes/listar(page=${condicoes.number + 1})}" style="text-decoration:none; font-weight:bold; color:#123b1d;">Próximo</a>
+    <a th:if="${condicoes.hasNext()}" th:href="@{/condicoes/listar(page=${condicoes.number + 1})}">Próximo</a>
 </div>
 
-<div style="margin-top:20px;">
-    <a th:href="@{/condicoes/nova}" style="text-decoration:none; font-weight:bold; border:1px solid #123b1d; padding:8px 12px; border-radius:6px; background:#123b1d; color:#6bed8d;">Nova Condição</a>
-</div>
+    <a th:href="@{/condicoes/nova}" class="new-btn">Nova Condição</a>
 
 </body>
 </html>

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/condicoes")
-public class CondicaoRestController implements IRestCondicaoController {
+public class    CondicaoRestController implements IRestCondicaoController {
     private final CondicaoService service;
 
     public CondicaoRestController(CondicaoService service) {
@@ -37,7 +37,7 @@ public class CondicaoRestController implements IRestCondicaoController {
 
     @GetMapping
     public ResponseEntity<Page<CondicaoResponse>> getAll(@RequestParam(defaultValue = "0") Integer page) {
-        Pageable pageable = PageRequest.of(page,1,   Sort.by("cor").ascending());
+        Pageable pageable = PageRequest.of(page,10,   Sort.by("cor").ascending());
         return new ResponseEntity<>(service.getAll(pageable), HttpStatus.OK);
     }
 
