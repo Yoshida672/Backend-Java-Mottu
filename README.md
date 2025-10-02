@@ -66,11 +66,13 @@ Ou execute a classe principal da aplicação na IDE (`@SpringBootApplication`).
 
 1. Abra o navegador e acesse a **página principal HTML** (geralmente `http://localhost:8080`).
 
-2. Faça login com:
-   - **Usuário:** `user`
-   - **Senha:** `user`
+| Tipo de Usuário   | Usuário | Senha   | Permissões                                |
+| ----------------- | ------- | ------- | ----------------------------------------- |
+| **Administrador** | `admin` | `admin` | Acesso completo ao sistema                |
+| **Usuário comum** | `user`  | `user`  | Apenas Visualização em *Filial* e *Pátio* |
+
 3. Navegue até uma página de **formulário** para testar o **CRUD** (Create, Read, Update, Delete).
-4. Verifique se as operações estão funcionando corretamente na interface.
+5. Verifique se as operações estão funcionando corretamente na interface.
 
 ---
 
